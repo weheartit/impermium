@@ -2,6 +2,8 @@ require "faraday"
 require "faraday_middleware"
 require "impermium/configuration"
 require "impermium/content"
+require "impermium/errors"
+require "faraday/raise_4xx"
 
 module Impermium
   class Client
@@ -17,11 +19,12 @@ module Impermium
 
     def connection
       @connection ||= Faraday.new(:url => endpoint, :headers => default_headers) do |builder|
-        builder.request :json
-        builder.adapter adapter
         builder.use Faraday::Response::Mashify
         builder.use Faraday::Response::ParseJson
-        builder.use Faraday::Response::Logger
+        builder.use Faraday::Response::Raise4xx
+        builder.request :json
+
+        builder.adapter adapter
       end
     end
 
