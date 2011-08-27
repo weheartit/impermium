@@ -33,7 +33,7 @@ module Impermium
         req.url api_url(url)
         req.headers['Content-Type'] = 'application/json'
         req.body = options
-      end
+      end.body
     end
 
     private
