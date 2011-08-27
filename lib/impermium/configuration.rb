@@ -2,6 +2,7 @@ module Impermium
   module Configuration
     VALID_CONFIG_KEYS = [
       :adapter,
+      :api_version,
       :api_key,
       :client_name,
       :client_id,
@@ -9,6 +10,7 @@ module Impermium
     ].freeze
 
     DEFAULT_ADAPTER = :net_http
+    DEFAULT_API_VERSION = "2.0"
     DEFAULT_API_KEY = nil
     DEFAULT_CLIENT_NAME = nil
     DEFAULT_CLIENT_ID = nil
@@ -32,6 +34,7 @@ module Impermium
     
     def reset
       self.adapter = DEFAULT_ADAPTER
+      self.api_version = DEFAULT_API_VERSION
       self.api_key = DEFAULT_API_KEY
       self.client_name = DEFAULT_CLIENT_NAME
       self.client_id = DEFAULT_CLIENT_ID
