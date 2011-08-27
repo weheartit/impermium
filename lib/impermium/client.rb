@@ -43,8 +43,8 @@ module Impermium
         :http_accept => "application/json"}
     end
 
-    def api_url(request_part, event_id = "impermium_gem_event_id_1")
-      "#{endpoint}/#{request_part}/#{api_version}/#{api_key}/#{event_id}"
+    def api_url(request_path, event_id = "impermium_gem_event_id_1")
+      "#{endpoint}/#{request_path}/#{api_version}/#{api_key}/#{event_id}"
     end
   end
 end
