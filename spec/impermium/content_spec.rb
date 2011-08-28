@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "content events" do
   before(:each) do
     @uid_ref = "uid_ref"
-    @content = "justa a comment"
+    @content = "just a comment"
     @resouce_url = "http://example.com"
     @enduser_ip = "1.1.1.1"
   end
