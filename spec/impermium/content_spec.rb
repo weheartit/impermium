@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe "content events" do
+describe "content comment events" do
   before(:each) do
     @uid_ref = "uid_ref"
     @content = "just a comment"
     @resouce_url = "http://example.com"
     @enduser_ip = "1.1.1.1"
   end
-  
 
   describe "missing arguments" do
     
