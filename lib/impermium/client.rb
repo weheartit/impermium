@@ -1,3 +1,4 @@
+require "uri"
 require "faraday"
 require "faraday_middleware"
 require "impermium/configuration"
@@ -37,7 +38,11 @@ module Impermium
     end
 
     def api_url(request_path, event_id = "impermium_gem_event_id_1")
-      URI.join(endpoint, request_path, api_version, api_key, event_id).to_s
+      url = URI.join(endpoint,
+        request_path[-1] == '/' ? request_path + "/" : request_path,
+        api_version + "/",
+        api_key + "/",
+        event_id).to_s
     end
 
     private

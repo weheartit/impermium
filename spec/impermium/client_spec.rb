@@ -52,13 +52,6 @@ describe "client configuration" do
   end
 
   describe "URL composing" do
-    it "should raise error with empty API key" do
-      Impermium.api_key = nil
-      lambda {
-        Impermium.api_url("/some/request/path")
-      }.should raise_error(ArgumentError)
-    end
-
     it "should contain passed path in the api URL" do
       path = "some/request/path/"
       Impermium.api_key = "api_key"

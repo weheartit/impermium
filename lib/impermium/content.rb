@@ -10,6 +10,16 @@ module Impermium
       post("content/blog_entry", options)
     end
 
+    def chat_message(uid_ref, uid_recv, content, enduser_ip, options={})
+      options.merge!(
+        :uid_ref => uid_ref,
+        :uid_recv => uid_recv,
+        :content => content,
+        :enduser_ip => enduser_ip
+        )
+      post("content/chat_message", options)
+    end
+    
     def comment(uid_ref, content, resource_url, enduser_ip, options={})
       options[:uid_ref] = uid_ref
       options[:content] = content
