@@ -39,7 +39,7 @@ module Impermium
 
     def api_url(request_path, event_id = "impermium_gem_event_id_1")
       url = URI.join(endpoint,
-        request_path[-1] == '/' ? request_path + "/" : request_path,
+        request_path[-1] == '/' ? request_path  : request_path + "/",
         api_version + "/",
         api_key + "/",
         event_id).to_s
