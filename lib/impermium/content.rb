@@ -9,7 +9,7 @@ module Impermium
         )
       post("content/blog_entry", options)
     end
-
+    
     def chat_message(uid_ref, uid_recv, content, enduser_ip, options={})
       options.merge!(
         :uid_ref => uid_ref,
@@ -20,11 +20,23 @@ module Impermium
       post("content/chat_message", options)
     end
     
+    def chatroom_message(uid_ref, content, resource_url, enduser_ip, options={})
+      options.merge!(
+        :uid_ref => uid_ref,
+        :content => content,
+        :resource_url => resource_url,
+        :enduser_ip => enduser_ip
+        )
+      post("content/chatroom_message", options)
+    end
+    
     def comment(uid_ref, content, resource_url, enduser_ip, options={})
-      options[:uid_ref] = uid_ref
-      options[:content] = content
-      options[:resource_url] = resource_url
-      options[:enduser_ip] = enduser_ip
+      options.merge!(
+        :uid_ref => uid_ref,
+        :content => content,
+        :resource_url => resource_url,
+        :enduser_ip => enduser_ip
+        )
       post("content/comment", options)
     end
   end
