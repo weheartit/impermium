@@ -3,12 +3,14 @@ require "faraday"
 require "faraday_middleware"
 require "impermium/configuration"
 require "impermium/content"
+require "impermium/account"
 require "impermium/errors"
 require "faraday/raise_4xx"
 
 module Impermium
   class Client
     include Configuration
+    include Account
     include Content
     
     def initialize(options = {})
