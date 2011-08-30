@@ -5,15 +5,17 @@ require "impermium/configuration"
 require "impermium/content"
 require "impermium/account"
 require "impermium/feedback"
+require "impermium/connection"
 require "impermium/errors"
 require "faraday/raise_4xx"
 
 module Impermium
   class Client
     include Configuration
+    include Content
     include Account
     include Feedback
-    include Content
+    include Connection
     
     def initialize(options = {})
       options = Impermium.options.merge(options)
