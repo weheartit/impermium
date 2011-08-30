@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "content comment events" do
+describe "content API section" do
   before(:each) do
     @uid_ref = "uid_ref"
     @uid_recv = "uid_recv"
