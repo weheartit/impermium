@@ -4,6 +4,7 @@ require "faraday_middleware"
 require "impermium/configuration"
 require "impermium/content"
 require "impermium/account"
+require "impermium/feedback"
 require "impermium/errors"
 require "faraday/raise_4xx"
 
@@ -11,6 +12,7 @@ module Impermium
   class Client
     include Configuration
     include Account
+    include Feedback
     include Content
     
     def initialize(options = {})
@@ -55,4 +57,3 @@ module Impermium
     end
   end
 end
-
