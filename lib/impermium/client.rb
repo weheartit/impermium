@@ -38,8 +38,8 @@ module Impermium
     def post(url, options={})
       connection.post do |req|
         req.url api_url(url)
-        req.headers['Content-Type'] = 'application/json'
         req.body = options
+        req.headers['Content-Type'] = 'application/json'
       end.body
     end
 
