@@ -40,6 +40,7 @@ module Impermium
         req.url api_url(url)
         req.body = options
         req.headers['Content-Type'] = 'application/json'
+        yield req if block_given?
       end.body
     end
 

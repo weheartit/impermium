@@ -1,6 +1,6 @@
 module Impermium
   module Feedback
-    def content(eid_ref, labels, feedback_origin, feedback_origin_role, enduser_ip, options={})
+    def content(eid_ref, labels, feedback_origin, feedback_origin_role, enduser_ip, options={}, &block)
       raise ArgumentError unless ["ANALYST", "ENDUSER", "EDITOR"].include? feedback_origin_role
 
       options.merge!(
@@ -10,10 +10,10 @@ module Impermium
         :feedback_origin_role => feedback_origin_role,
         :enduser_ip => enduser_ip
         )
-      post("feedback/content", options)
+      post("feedback/content", options, &block)
     end
 
-    def user(uid_ref, labels, feedback_origin, feedback_origin_role, enduser_ip, options={})
+    def user(uid_ref, labels, feedback_origin, feedback_origin_role, enduser_ip, options={}, &block)
       raise ArgumentError unless ["ANALYST", "ENDUSER", "EDITOR"].include? feedback_origin_role
 
       options.merge!(
@@ -23,7 +23,7 @@ module Impermium
         :feedback_origin_role => feedback_origin_role,
         :enduser_ip => enduser_ip
         )
-      post("feedback/user", options)
+      post("feedback/user", options, &block)
     end
   end
 end
