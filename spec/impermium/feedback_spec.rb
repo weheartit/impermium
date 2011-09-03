@@ -45,7 +45,7 @@ describe "feedback API section" do
         stub = stub_post("feedback/content").to_return(:status => 200, :body => fixture_content('content'),
           :headers => {:content_type => "application/json; charset=utf-8"})
         res = Impermium.content(@uid_ref, @labels, @feedback_origin, @feedback_origin_role, @enduser_ip)
-        res.etype.should == "content"
+        res.etype.should == "content_feedback"
         res.should respond_to(:ts)
         res.should respond_to(:etype)
         res.should_not respond_to(:spam)
