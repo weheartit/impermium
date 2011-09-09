@@ -1,0 +1,3 @@
+:api_key: your_api_key_here
+:endpoint: "http://api-test.impermium.com"
+:api_key_replacement: string_which_will_replace_api_key

@@ -1,0 +1,29 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/feedback/content/2.0/api_key_replace/impermium_gem_event_id_1
+    body: ! '{"eid_ref":"","labels":[{"profanity_classifier":"not-profane","other_classifier":"label2"}],"feedback_origin":"impermium.gem@example.com","feedback_origin_role":"ANALYST","enduser_ip":"1.1.1.1"}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 400
+      message: Bad Request
+    headers:
+      date:
+      - Fri, 09 Sep 2011 20:34:56 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"status" : 400, "message" : "Unable to verify the schema of the event:
+      (Value '''' is not of type ''string'' for element ''eid_ref'')"}'
+    http_version: '1.1'

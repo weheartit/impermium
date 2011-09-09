@@ -1,18 +1,31 @@
 require 'rspec'
-require 'webmock/rspec'
 require 'impermium'
+require "vcr"
+require "psych"
 
-def stub_post(path)
-  Impermium.api_key = 'some_api'
-  Impermium.endpoint = 'http://api-test.impermium.com'
-
-  stub_request(:post, Impermium.api_url(path))
+conf_file = File.join(File.expand_path("..", __FILE__), "configuration.yml")
+conf = {}
+if File.exist?(conf_file)
+  conf = Psych.load_file(conf_file)
+  Impermium.api_key = conf[:api_key]
+  Impermium.endpoint = conf[:endpoint]
+else
+  puts "WARNING: No configuration file found. API key must be set before tests are started"
 end
 
-def fixture_content(fixture_name)
-  return '' if fixture_name.nil? || fixture_name.empty?
-  fixture_file = File.join(File.expand_path('..', __FILE__), 'fixtures', "#{fixture_name}.json")
-  return '' unless File.exist?(fixture_file)
+VCR.config do |vcr|
+  vcr.cassette_library_dir = "spec/cassettes"
+  vcr.stub_with :webmock
+  vcr.default_cassette_options = { :record => :new_episodes }
+  vcr.before_record do |vc|
+    vc.request.uri.sub!(Impermium.api_key, conf[:api_key_replacement])
+  end
 
-  File.open(fixture_file, 'r') { |f| f.read }
+  vcr.before_playback do |vc|
+    vc.request.uri.sub!(conf[:api_key_replacement], Impermium.api_key)
+  end
+end
+
+RSpec.configure do |conf|
+  conf.extend VCR::RSpec::Macros
 end

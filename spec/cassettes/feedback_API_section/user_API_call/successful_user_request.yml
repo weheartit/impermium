@@ -1,0 +1,28 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/feedback/user/2.0/api_key_replace/impermium_gem_event_id_1
+    body: ! '{"uid_ref":"uid_ref","labels":[{"profanity_classifier":"not-profane","other_classifier":"label2"}],"feedback_origin":"impermium.gem@example.com","feedback_origin_role":"ANALYST","enduser_ip":"1.1.1.1"}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 09 Sep 2011 20:34:58 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"etype":"enduser_feedback","ts":"20110909203458Z","eid":"impermium_gem_event_id_1","rid":"clid_boardreader@196@@14711@events2001.impermium.com"}'
+    http_version: '1.1'
