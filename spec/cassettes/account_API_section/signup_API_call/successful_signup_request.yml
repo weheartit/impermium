@@ -2,8 +2,8 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :post
-    uri: http://api-test.impermium.com:80/feedback/content/2.0/api_key_replace/impermium_gem_event_id_1
-    body: ! '{"eid_ref":"","labels":[{"profanity_classifier":"not-profane","other_classifier":"label2"}],"feedback_origin":"impermium.gem@example.com","feedback_origin_role":"ANALYST","enduser_ip":"1.1.1.1"}'
+    uri: http://api-test.impermium.com:80/account/signup/2.0/api_key_replace/impermium_gem_event_id_1
+    body: ! '{}'
     headers:
       http-user-agent:
       - Impermium Ruby Gem
@@ -17,7 +17,7 @@
       message: Bad Request
     headers:
       date:
-      - Fri, 09 Sep 2011 21:21:10 GMT
+      - Fri, 09 Sep 2011 21:21:17 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
