@@ -23,7 +23,7 @@ module Impermium
         :uid => uid,
         :enduser_ip => enduser_ip
         )
-      post("account/signup", options={}, &block)
+      post("account/signup", options, &block)
     end
 
     def signup_attempt(enduser_ip, options={}, &block)
