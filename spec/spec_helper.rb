@@ -16,7 +16,7 @@ end
 VCR.config do |vcr|
   vcr.cassette_library_dir = "spec/cassettes"
   vcr.stub_with :webmock
-  vcr.default_cassette_options = { :record => :new_episodes }
+  vcr.default_cassette_options = { :record => :once }
   vcr.before_record do |vc|
     vc.request.uri.sub!(Impermium.api_key, conf[:api_key_replacement])
   end
