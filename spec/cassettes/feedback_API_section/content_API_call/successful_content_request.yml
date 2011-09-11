@@ -13,17 +13,16 @@
       - application/json
   response: !ruby/struct:VCR::Response
     status: !ruby/struct:VCR::ResponseStatus
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       date:
-      - Fri, 09 Sep 2011 21:21:11 GMT
+      - Sun, 11 Sep 2011 15:02:22 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
       - chunked
       content-type:
       - application/json
-    body: ! '{"status" : 400, "message" : "Unable to validate the api_key in the request
-      (api_key). Check if the api_key is valid"}'
+    body: ! '{"etype":"content_feedback","ts":"20110911150222Z","eid":"impermium_gem_event_id_1","rid":"clid_boardreader@188@@14711@events2001.impermium.com"}'
     http_version: '1.1'
