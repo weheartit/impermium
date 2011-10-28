@@ -7,6 +7,7 @@ require "impermium/account"
 require "impermium/feedback"
 require "impermium/connection"
 require "impermium/errors"
+require "impermium/user"
 require "faraday/raise_4xx"
 
 module Impermium
@@ -16,6 +17,7 @@ module Impermium
     include Account
     include Feedback
     include Connection
+    include User
     
     def initialize(options = {})
       options = Impermium.options.merge(options)
@@ -44,12 +46,11 @@ module Impermium
       end.body
     end
 
-    def api_url(request_path, event_id = "impermium_gem_event_id_1")
+    def api_url(request_path)
       url = URI.join(endpoint,
         request_path[-1] == '/' ? request_path  : request_path + "/",
         api_version + "/",
-        api_key + "/",
-        event_id).to_s
+        api_key + "/").to_s
     end
 
     private
