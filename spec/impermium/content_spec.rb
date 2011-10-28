@@ -1,85 +1,85 @@
-require 'spec_helper'
+require "spec_helper"
+require "json"
 
 describe "content API section" do
   before(:each) do
-    @uid_ref = "uid_ref"
-    @uid_recv = "uid_recv"
+    @user_id = "whi345"
+    @ip = "1.1.1.1"
     @content = "just a comment"
-    @resouce_url = "http://example.com"
-    @enduser_ip = "1.1.1.1"
+    @post_id = "just-a-comment#984721"
+    @permalink = "http://example.com/2011/10/27/just_a_comment"
+    @url = "http://example.com"
+    @desired_result = { :spam_classifier => { :label => "notspam" } }.to_json
   end
 
-  describe "blog_entry API call" do
-    describe "missing blog_entry arguments" do
+  describe "blogpost API call" do
+    describe "missing blogpost arguments" do
       use_vcr_cassette
+      
+      it "should raise BadRequest error if 'user_id' is missing" do
+        lambda { Impermium.blogpost("", @post_id, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'blogpost_id' is missing" do
+        lambda { Impermium.blogpost(@user_id, "", @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'content' is missing" do
+        lambda { Impermium.blogpost(@user_id, @post_id, "", @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'blogpost_permalink' is missing" do
+        lambda { Impermium.blogpost(@user_id, @post_id, @content, "", @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'blog_url' is missing" do
+        lambda { Impermium.blogpost(@user_id, @post_id, @content, @permalink, "", @ip) }.should raise_error(Impermium::BadRequest)
+      end
       
       it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.blog_entry(@uid_ref, @content, @resource_url, "") }.should raise_error(Impermium::BadRequest)
-      end
-      
-      it "should raise BadRequest error if 'resource_url' is missing" do
-        lambda { Impermium.blog_entry(@uid_ref, @content, "", @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
-    end
-
-    describe "successful blog_entry request" do
-      use_vcr_cassette
-
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.blog_entry(@uid_ref, @content, @resource_url, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+        lambda { Impermium.blogpost(@user_id, @post_id, @content, @permalink, @url, "") }.should raise_error(Impermium::BadRequest)
       end
     end
-  end
 
-  describe "chat_message API call" do
-    describe "missing chat_message arguments" do
-      use_vcr_cassette
-      
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.chat_message(@uid_ref, @uid_recv, @content, "") }.should raise_error(Impermium::BadRequest)
-      end
-      
-      it "should raise BadRequest error if 'uid_recv' is missing" do
-        lambda { Impermium.chat_message(@uid_ref, "", @content, @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
-    end
-
-    describe "successful chat_message request" do
+    describe "successful blogpost request" do
       use_vcr_cassette
 
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.chat_message(@uid_ref, @uid_recv, @content, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+      it "should mark blog post with 'notspam' label" do
+        res = Impermium.blogpost(@user_id, @post_id, @content, @permalink, @url, @ip)
+        res.spam_classifier.label == "notlabel"
+        res.spam_classifier.score.should be_within(0.1).of(0.0)
       end
     end
   end
 
-  describe "chatroom_message API call" do
-    describe "missing chatroom_message arguments" do
+  describe "bookmark API call" do
+    describe "missing bookmark arguments" do
       use_vcr_cassette
+      
+      it "should raise BadRequest error if 'user_id' is missing" do
+        lambda { Impermium.bookmark("", @post_id, @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'bookmark_id' is missing" do
+        lambda { Impermium.bookmark(@user_id, "", @url, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'bookmark_url' is missing" do
+        lambda { Impermium.bookmark(@user_id, @post_id, "", @ip) }.should raise_error(Impermium::BadRequest)
+      end
       
       it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.chatroom_message(@uid_ref, @content, @resource_url, "") }.should raise_error(Impermium::BadRequest)
+        lambda { Impermium.bookmark(@user_id, @post_id, @url, "") }.should raise_error(Impermium::BadRequest)
       end
-      
-      it "should raise BadRequest error if 'resource_url' is missing" do
-        lambda { Impermium.chatroom_message(@uid_ref, @content, "", @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
     end
 
-    describe "successful chatroom_message request" do
+    describe "successful bookmark request" do
       use_vcr_cassette
 
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.chatroom_message(@uid_ref, @content, @resource_url, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+      it "should mark blog post with 'notspam' label" do
+        res = Impermium.bookmark(@user_id, @post_id, @url, @ip)
+        res.spam_classifier.label == "notlabel"
+        res.spam_classifier.score.should be_within(0.1).of(0.0)
       end
     end
   end
@@ -88,157 +88,104 @@ describe "content API section" do
     describe "missing comment arguments" do
       use_vcr_cassette
       
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.comment(@uid_ref, @content, @resource_url, "") }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'user_id' is missing" do
+        lambda { Impermium.comment("", "123456", @content, @permalink, @permalink, @ip) }.should raise_error(Impermium::BadRequest)
       end
       
-      it "should raise BadRequest error if 'resource_url' is missing" do
-        lambda { Impermium.comment(@uid_ref, @content, "", @enduser_ip) }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'comment_id' is missing" do
+        lambda { Impermium.comment(@user_id, "", @content, @permalink, @permalink, @ip) }.should raise_error(Impermium::BadRequest)
       end
       
+      it "should raise BadRequest error if 'content' is missing" do
+        lambda { Impermium.comment(@user_id, "123456", "", @permalink, @permalink, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'comment_permalink' is missing" do
+        lambda { Impermium.comment(@user_id, "123456", @content, "", @permalink, @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'article_permalink' is missing" do
+        lambda { Impermium.comment(@user_id, "123456", @content, @permalink, "", @ip) }.should raise_error(Impermium::BadRequest)
+      end
+      
+      it "should raise BadRequest error if 'user_ip' is missing" do
+        lambda { Impermium.comment(@user_id, "123456", @content, @permalink, @permalink, "") }.should raise_error(Impermium::BadRequest)
+      end
     end
 
     describe "successful comment request" do
       use_vcr_cassette
 
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.comment(@uid_ref, @content, @resource_url, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+      it "should mark comment with 'notspam' label" do
+        res = Impermium.comment(@user_id, "123456", @content, @permalink, @permalink, @ip)
+        res.spam_classifier.label == "notlabel"
+        res.spam_classifier.score.should be_within(0.1).of(0.0)
       end
     end
   end
 
-  describe "forum_message API call" do
-    describe "missing forum_message arguments" do
+  describe "analystfeedback API call" do
+    describe "missing analystfeedback arguments" do
       use_vcr_cassette
       
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.forum_message(@uid_ref, @content, @resource_url, "") }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'analyst_id' is missing" do
+        lambda { Impermium.content_analystfeedback("", "123456", @desired_result) }.should raise_error(Impermium::BadRequest)
       end
       
-      it "should raise BadRequest error if 'resource_url' is missing" do
-        lambda { Impermium.forum_message(@uid_ref, @content, "", @enduser_ip) }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'comment_id' is missing" do
+        lambda { Impermium.content_analystfeedback(@user_id, "", @desired_result) }.should raise_error(Impermium::BadRequest)
       end
-      
+       
+      it "should raise BadRequest error if 'comment_id' is missing" do
+        lambda { Impermium.content_analystfeedback(@user_id, "123456", "") }.should raise_error(Impermium::BadRequest)
+      end
     end
 
-    describe "successful forum_message request" do
+    describe "successful analystfeedback request" do
       use_vcr_cassette
 
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.forum_message(@uid_ref, @content, @resource_url, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
-      end
-    end
-  end
-
-  describe "generic API call" do
-    describe "missing generic arguments" do
-      use_vcr_cassette
-      
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.generic(@uid_ref, "api testing request", @content, @resource_url, "") }.should raise_error(Impermium::BadRequest)
-      end
-      
-      it "should raise BadRequest error if 'resource_url' is missing" do
-        lambda { Impermium.generic(@uid_ref, "api testing request", @content, "", @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
-    end
-
-    describe "successful generic request" do
-      use_vcr_cassette
-
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.generic(@uid_ref, "api testing request", @content, @resource_url, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+      it "it should be successful request" do
+        res = Impermium.content_analystfeedback(@user_id, "123456", @desired_result)
+        res.response_id.start_with?("clid_boardreader").should be_true
       end
     end
   end
 
-  describe "message API call" do
-    describe "missing message arguments" do
+  describe "userfeedback API call" do
+    describe "missing userfeedback arguments" do
       use_vcr_cassette
       
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.message(@uid_ref, @uid_recv, @content, "") }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'reporter_user_id' is missing" do
+        lambda { Impermium.content_userfeedback("", "ADMINUSER", @ip, @post_id, @desired_result) }.should raise_error(Impermium::BadRequest)
       end
       
-      it "should raise BadRequest error if 'uid_recv' is missing" do
-        lambda { Impermium.message(@uid_ref, "", @content, @enduser_ip) }.should raise_error(Impermium::BadRequest)
+      it "should raise BadRequest error if 'reporter_user_type' is missing" do
+        lambda { Impermium.content_userfeedback(@user_id, "", @ip, @post_id, @desired_result) }.should raise_error(Impermium::BadRequest)
       end
       
+      it "should raise BadRequest error if 'reporter_ip' is missing" do
+        lambda { Impermium.content_userfeedback(@user_id, "ENDUSER", "", @post_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      end
+
+      it "should raise BadRequest error if 'comment_id' is missing" do
+        lambda { Impermium.content_userfeedback(@user_id, "ENDUSER", @ip, "", @desired_result) }.should raise_error(Impermium::BadRequest)
+      end
+
+      it "should raise BadRequest error if 'desired_result' is missing" do
+        lambda { Impermium.content_userfeedback(@user_id, "ENDUSER", @ip, @post_id, "") }.should raise_error(Impermium::BadRequest)
+      end
+
+      it "should raise BadRequest error for invalid reporter type values" do
+        lambda { Impermium.content_userfeedback(@user_id, "ADMINUSER", @ip, @post_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      end
     end
 
-    describe "successful message request" do
+    describe "successful userfeedback request" do
       use_vcr_cassette
 
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.message(@uid_ref, @uid_recv, @content, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
-      end
-    end
-  end
-
-  describe "rating API call" do
-    describe "missing rating arguments" do
-      use_vcr_cassette
-      
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.rating(@uid_ref, 1, "") }.should raise_error(Impermium::BadRequest)
-      end
-      
-      it "should raise BadRequest error if 'uid_ref' is missing" do
-        lambda { Impermium.rating("", 1, @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
-    end
-
-    describe "bad rating value" do
-      use_vcr_cassette
-
-      it "should raise ArgumentError for invalid rating value" do
-        lambda { Impermium.rating(@uid_ref, 0, @enduser_ip) }.should raise_error(ArgumentError)
-      end
-    end
-        
-    describe "successful rating request" do
-      use_vcr_cassette
-
-      it "should return simple response object" do
-        res = Impermium.rating(@uid_ref, 5, @enduser_ip)
-        res.should respond_to(:ts)
-        res.should respond_to(:etype)
-        res.should_not respond_to(:spam)
-      end
-    end
-  end
-
-  describe "wall_message API call" do
-    describe "missing wall_message arguments" do
-      use_vcr_cassette
-      
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.wall_message(@uid_ref, @uid_recv, @content, "") }.should raise_error(Impermium::BadRequest)
-      end
-      
-      it "should raise BadRequest error if 'uid_recv' is missing" do
-        lambda { Impermium.wall_message(@uid_ref, "", @content, @enduser_ip) }.should raise_error(Impermium::BadRequest)
-      end
-      
-    end
-
-    describe "successful wall_message request" do
-      use_vcr_cassette
-
-      it "should flag 'just a comment' as not spam" do
-        res = Impermium.wall_message(@uid_ref, @uid_recv, @content, @enduser_ip)
-        res.spam.confidence.should == "medium"
-        res.spam.label.should == "notspam"
+      it "it should be successful request" do
+        res = Impermium.content_userfeedback(@user_id, "ENDUSER", @ip, @post_id, @desired_result)
+        res.response_id.start_with?("clid_boardreader").should be_true
       end
     end
   end

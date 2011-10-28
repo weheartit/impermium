@@ -2,8 +2,8 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :post
-    uri: http://api-test.impermium.com:80/user/account/userfeedback/3.0/api_key_replace/
-    body: ! '{"reporter_user_id":"","reporter_user_type":"ADMINUSER","reporter_ip":"1.1.1.1","user_id":"whi543","desired_result":"{\"spam_classifier\":{\"label\":\"notspam\"}}"}'
+    uri: http://api-test.impermium.com:80/content/comment/analystfeedback/3.0/api_key_replace/
+    body: ! '{"analyst_id":"","comment_id":"123456","desired_result":null}'
     headers:
       http-user-agent:
       - Impermium Ruby Gem
@@ -17,7 +17,7 @@
       message: Bad Request
     headers:
       date:
-      - Thu, 27 Oct 2011 18:40:27 GMT
+      - Fri, 28 Oct 2011 19:25:34 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
@@ -25,6 +25,6 @@
       content-type:
       - application/json
     body: ! '{"status" : 400, "message" : "Unable to verify the schema of the event:
-      (Value '''' is not of type ''string'' for element ''reporter_user_id'' Only
-      the following values are allowed for this field (ENDUSER MODERATOR))"}'
+      (Required element ''desired_result'' could not be found Value '''' is not of
+      type ''string'' for element ''analyst_id'')"}'
     http_version: '1.1'

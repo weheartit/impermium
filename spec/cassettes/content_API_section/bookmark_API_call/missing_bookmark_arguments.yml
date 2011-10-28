@@ -2,8 +2,8 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :post
-    uri: http://api-test.impermium.com:80/content/blog_entry/2.0/api_key_replace/impermium_gem_event_id_1
-    body: ! '{"uid_ref":"uid_ref","content":"just a comment","resource_url":null,"enduser_ip":""}'
+    uri: http://api-test.impermium.com:80/content/bookmark/3.0/api_key_replace/
+    body: ! '{"user_id":"","bookmark_id":"just-a-comment#984721","bookmark_url":"http://example.com","enduser_ip":"1.1.1.1"}'
     headers:
       http-user-agent:
       - Impermium Ruby Gem
@@ -17,7 +17,7 @@
       message: Bad Request
     headers:
       date:
-      - Sun, 11 Sep 2011 15:10:35 GMT
+      - Thu, 27 Oct 2011 20:43:54 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
@@ -25,5 +25,5 @@
       content-type:
       - application/json
     body: ! '{"status" : 400, "message" : "Unable to verify the schema of the event:
-      (Value '''' is not of type ''string'' for element ''enduser_ip'')"}'
+      (Value '''' is not of type ''string'' for element ''user_id'')"}'
     http_version: '1.1'

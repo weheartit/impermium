@@ -1,0 +1,29 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/content/blogpost/3.0/api_key_replace/
+    body: ! '{"user_id":"whi345","blogpost_id":"just-a-comment#984721","content":"just
+      a comment","blogpost_permalink":"http://example.com/2011/10/27/just_a_comment","blog_url":"http://example.com","enduser_ip":"1.1.1.1"}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 27 Oct 2011 20:43:53 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"quality_classifier":{"score":0,"label":null},"profanity_classifier":{"label":null},"timestamp":"20111027204353Z","spam_classifier":{"score":0.07,"label":"notspam"},"response_id":"clid_boardreader@60@@25724@events2001.impermium.com"}'
+    http_version: '1.1'

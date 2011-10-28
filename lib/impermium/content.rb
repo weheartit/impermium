@@ -1,61 +1,57 @@
 module Impermium
   module Content
-    [:blog_entry, :chatroom_message].each do |mname|
-      define_method(mname) do |uid_ref, content, resource_url, enduser_ip, options={}, &block|
-        options.merge!(
-          :uid_ref => uid_ref,
-          :content => content,
-          :resource_url => resource_url,
-          :enduser_ip => enduser_ip
-          )
-        post("content/#{mname.to_s}", options, &block)
-      end
-    end
-
-    [:chat_message, :message, :wall_message].each do |mname|
-      define_method(mname) do |uid_ref, uid_recv, content, enduser_ip, options={}, &block|
-        options.merge!(
-          :uid_ref => uid_ref,
-          :uid_recv => uid_recv,
-          :content => content,
-          :enduser_ip => enduser_ip
-          )
-        post("content/#{mname.to_s}", options, &block)
-      end
+    def blogpost(user_id, blogpost_id, content, blogpost_permalink, blog_url, enduser_ip, options={}, &block)
+      options.merge!(
+        :user_id => user_id,
+        :blogpost_id => blogpost_id,
+        :content => content,
+        :blogpost_permalink => blogpost_permalink,
+        :blog_url => blog_url,
+        :enduser_ip => enduser_ip
+        )
+      post("content/blogpost", options, &block)
     end
     
-    [:comment, :forum_message].each do |mname|
-      define_method(mname) do |uid_ref, content, resource_url, enduser_ip, options = {}, &block|
-        options.merge!(
-          :uid_ref => uid_ref,
-          :content => content,
-          :resource_url => resource_url,
-          :enduser_ip => enduser_ip
-          )
-        post("content/#{mname.to_s}", options, &block)
-      end
-    end
-
-    def generic(uid_ref, ctype, content, resource_url, enduser_ip, options={}, &block)
+    def bookmark(user_id, bookmark_id, bookmark_url, enduser_ip, options={}, &block)
       options.merge!(
-        :uid_ref => uid_ref,
-        :ctype => ctype,
+        :user_id => user_id,
+        :bookmark_id => bookmark_id,
+        :bookmark_url => bookmark_url,
+        :enduser_ip => enduser_ip
+        )
+      post("content/bookmark", options, &block)
+    end
+    
+    def comment(user_id, comment_id, content, comment_permalink, article_permalink, enduser_ip, options={}, &block)
+      options.merge!(
+        :user_id => user_id,
+        :comment_id => comment_id,
         :content => content,
-        :resource_url => resource_url,
+        :comment_permalink => comment_permalink,
+        :article_permalink => article_permalink,
         :enduser_ip => enduser_ip
         )
-      post("content/generic", options, &block)
+      post("content/comment", options, &block)
     end
-
-    def rating(uid_ref, rating, enduser_ip, options={}, &block)
-      raise ArgumentError, 'Rating is not in valid range' unless [1, 2, 3, 4, 5].include?(rating.to_i)
-      
+    
+    def content_analystfeedback(analyst_id, comment_id, desired_result, options={}, &block)
       options.merge!(
-        :uid_ref => uid_ref,
-        :rating => rating,
-        :enduser_ip => enduser_ip
+        :analyst_id => analyst_id,
+        :comment_id => comment_id,
+        :desired_result => desired_result
         )
-      post("content/rating", options, &block)
+      post("content/comment/analystfeedback", options, &block)
+    end
+    
+    def content_userfeedback(rep_usr_id, rep_usr_type, reporter_ip, comment_id, desired_result, options={}, &block)
+      options.merge!(
+        :reporter_user_id => rep_usr_id,
+        :reporter_user_type => rep_usr_type,
+        :reporter_ip => reporter_ip,
+        :comment_id => comment_id,
+        :desired_result => desired_result
+        )
+      post("content/comment/userfeedback", options, &block)
     end
   end
 end

@@ -2,8 +2,8 @@
 - !ruby/struct:VCR::HTTPInteraction
   request: !ruby/struct:VCR::Request
     method: :post
-    uri: http://api-test.impermium.com:80/user/account/3.0/api_key_replace/
-    body: ! '{"user_id":"whi543","enduser_ip":"1.1.1.1"}'
+    uri: http://api-test.impermium.com:80/content/bookmark/3.0/api_key_replace/
+    body: ! '{"user_id":"whi345","bookmark_id":"just-a-comment#984721","bookmark_url":"http://example.com","enduser_ip":"1.1.1.1"}'
     headers:
       http-user-agent:
       - Impermium Ruby Gem
@@ -17,12 +17,12 @@
       message: OK
     headers:
       date:
-      - Thu, 27 Oct 2011 18:40:25 GMT
+      - Thu, 27 Oct 2011 20:43:54 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
       - chunked
       content-type:
       - application/json
-    body: ! '{"quality_classifier":{"score":0,"label":null},"profanity_classifier":{"label":null},"timestamp":"20111027184025Z","spam_classifier":{"score":0,"label":"notspam"},"response_id":"clid_boardreader@42@@25724@events2001.impermium.com"}'
+    body: ! '{"quality_classifier":{"score":0,"label":null},"profanity_classifier":{"label":null},"timestamp":"20111027204355Z","spam_classifier":{"score":0,"label":"notspam"},"response_id":"clid_boardreader@1@@25724@events2001.impermium.com"}'
     http_version: '1.1'
