@@ -1,0 +1,28 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/user/account/analystfeedback/3.0/api_key_replace/
+    body: ! '{"analyst_id":"123456","user_id":"whi543","desired_result":"{\"spam_classifier\":{\"label\":\"notspam\"}}"}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 28 Oct 2011 19:54:51 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"timestamp":"20111028195451Z","response_id":"clid_boardreader@137@@25724@events2001.impermium.com"}'
+    http_version: '1.1'
