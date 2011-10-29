@@ -17,12 +17,12 @@
       message: OK
     headers:
       date:
-      - Fri, 28 Oct 2011 19:54:52 GMT
+      - Sat, 29 Oct 2011 10:22:53 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
       - chunked
       content-type:
       - application/json
-    body: ! '{"timestamp":"20111028195453Z","response_id":"clid_boardreader@43@@25724@events2001.impermium.com"}'
+    body: ! '{"timestamp":"20111029102253Z","response_id":"clid_boardreader@44@@25724@events2001.impermium.com"}'
     http_version: '1.1'

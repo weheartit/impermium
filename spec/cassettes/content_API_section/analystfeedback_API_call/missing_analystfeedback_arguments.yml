@@ -3,7 +3,7 @@
   request: !ruby/struct:VCR::Request
     method: :post
     uri: http://api-test.impermium.com:80/content/comment/analystfeedback/3.0/api_key_replace/
-    body: ! '{"analyst_id":"","comment_id":"123456","desired_result":null}'
+    body: ! '{"analyst_id":"","comment_id":"123456","desired_result":"{\"spam_classifier\":{\"label\":\"notspam\"}}"}'
     headers:
       http-user-agent:
       - Impermium Ruby Gem
@@ -17,7 +17,7 @@
       message: Bad Request
     headers:
       date:
-      - Fri, 28 Oct 2011 19:25:34 GMT
+      - Sat, 29 Oct 2011 10:31:22 GMT
       server:
       - Apache/2.2.14 (Ubuntu)
       transfer-encoding:
@@ -25,6 +25,5 @@
       content-type:
       - application/json
     body: ! '{"status" : 400, "message" : "Unable to verify the schema of the event:
-      (Required element ''desired_result'' could not be found Value '''' is not of
-      type ''string'' for element ''analyst_id'')"}'
+      (Value '''' is not of type ''string'' for element ''analyst_id'')"}'
     http_version: '1.1'
