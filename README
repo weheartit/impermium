@@ -18,7 +18,7 @@ which is actually short way of
 
 Constructor accepts hash of options that can be used to configure Impermium client. Valid hash keys are
 
- - :adapter (sts Faraday adapter)
+ - :adapter (sets Faraday adapter)
  - :api_version (sets Impermium API version - default 3.0)
  - :api_key (sets API key)
  - :client_name (sets client name)
