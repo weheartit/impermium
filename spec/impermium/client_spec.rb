@@ -54,8 +54,8 @@ describe "client configuration" do
   describe "URL composing" do
     it "should contain passed path in the api URL" do
       path = "some/request/path/"
-      Impermium.api_key = "api_key"
-      Impermium.api_url(path).should include(path)
+      client = Impermium.new(:api_key => "test_api_key")
+      client.api_url(path).should include(path)
     end
   end
   
