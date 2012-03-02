@@ -11,21 +11,25 @@ describe "user API section" do
 
   describe "account method" do
     describe "missing arguments" do
-      use_vcr_cassette
-      
-      it "should raise BadRequest error if 'user_id' is missing" do
-        lambda { Impermium.account("", @ip_address) }.should raise_error(Impermium::BadRequest)
+      describe "missing user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account(nil, @ip_address) }.should raise_error(Impermium::BadRequest)
+        end
       end
-
-      it "should raise BadRequest error if 'enduser_ip' is missing" do
-        lambda { Impermium.account(@user_id, "") }.should raise_error(Impermium::BadRequest)
+      
+      describe "missing enduser_ip" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account(@user_id, '') }.should raise_error(Impermium::BadRequest)
+        end
       end
     end
 
     describe "successful account method request" do
       use_vcr_cassette
 
-      it "should should mark user with zero spam classifier score" do
+      it "should mark user with zero spam classifier score" do
         res = Impermium.account(@user_id, @ip_address)
         res.spam_classifier.score.to_i.should == 0
         res.spam_classifier.label.should == "notspam"

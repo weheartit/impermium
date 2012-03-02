@@ -6,6 +6,8 @@ module Impermium
         :enduser_ip => enduser_ip
         )
       post("user/account", options, &block)
+      post("account", options, &block)
+    end
     end
 
     def analystfeedback(analyst_id, user_id, desired_result, options={}, &block)
