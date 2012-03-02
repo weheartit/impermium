@@ -6,7 +6,7 @@ describe "user API section" do
     @user_id = "whi543"
     @ip_address = "1.1.1.1"
     @analyst_id = "123456"
-    @desired_result = { :spam_classifier => { :label => "notspam" } }.to_json
+    @desired_result = {:spam_classifier => { :label => "notspam" }}
   end
 
   describe "account method" do
@@ -82,25 +82,29 @@ describe "user API section" do
     end
   end
 
-  describe "analystfeedback method" do
+  describe "account_analyst_feedback method" do
     describe "missing arguments" do
-      use_vcr_cassette
-
-      it "should raise BadRequest error if 'analyst_id' is missing" do
-        lambda { Impermium.analystfeedback("", @user_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "missing analyst_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_analyst_feedback(nil, @user_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
+        end
       end
       
-      it "should raise BadRequest error if 'user_id' is missing" do
-        lambda { Impermium.analystfeedback(@analyst_id, "", @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "missing user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /user_id/)
+        end
       end
     end
 
-    describe "successful analystfeedback method request" do
+    describe "successful account_analyst_feedback method request" do
       use_vcr_cassette
-
-      it "should should be successful request" do
-        res = Impermium.analystfeedback(@analyst_id, @user_id, @desired_result)
-        res.response_id.start_with?("clid_boardreader").should be_true
+      it "should return an OK response" do
+        res = Impermium.account_analyst_feedback(@analyst_id, @user_id, @desired_result)
+        res.response_id.should be_true
+        res.timestamp.should be_true
       end
     end
   end

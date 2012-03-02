@@ -23,13 +23,13 @@ module Impermium
       post("account/login", options, &block)
     end
 
-    def analystfeedback(analyst_id, user_id, desired_result, options={}, &block)
+    def account_analyst_feedback(analyst_id, user_id, desired_result, options={}, &block)
       options.merge!(
         :analyst_id => analyst_id,
         :user_id => user_id,
         :desired_result => desired_result
         )
-      post("user/account/analystfeedback", options, &block)
+      post("account/analyst_feedback", options, &block)
     end
 
     def userfeedback(rep_usr_id, rep_usr_type, reporter_ip, user_id, desired_result, options={}, &block)
