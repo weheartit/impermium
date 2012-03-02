@@ -5,7 +5,6 @@ module Impermium
         :user_id => user_id,
         :enduser_ip => enduser_ip
         )
-      post("user/account", options, &block)
       post("account", options, &block)
     end
     
@@ -15,6 +14,13 @@ module Impermium
         )
       post("account/attempt", options, &block)
     end
+    
+    def account_login(user_id, enduser_ip, options={}, &block)
+      options.merge!(
+        :user_id => user_id,
+        :enduser_ip => enduser_ip
+        )
+      post("account/login", options, &block)
     end
 
     def analystfeedback(analyst_id, user_id, desired_result, options={}, &block)

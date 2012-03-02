@@ -54,6 +54,33 @@ describe "user API section" do
       end
     end
   end
+  
+  describe "account_login method" do
+    describe "missing arguments" do
+      describe "missing user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_login(nil, @ip_address) }.should raise_error(Impermium::BadRequest)
+        end
+      end
+      
+      describe "missing enduser_ip" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_login(@user_id, '') }.should raise_error(Impermium::BadRequest)
+        end
+      end
+    end
+
+    describe "successful account_login request" do
+      use_vcr_cassette
+      it "should log the info and return an OK response" do
+        res = Impermium.account_login(@user_id, @ip_address)
+        res.response_id.should be
+        res.timestamp.should be
+      end
+    end
+  end
 
   describe "analystfeedback method" do
     describe "missing arguments" do
