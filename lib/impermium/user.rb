@@ -1,5 +1,7 @@
 module Impermium
   module User
+    REPORTER_USER_TYPE_VALUES = ["ENDUSER", "MODERATOR"] # => default first
+
     def account(user_id, enduser_ip, options={}, &block)
       options.merge!(
         :user_id => user_id,
@@ -32,11 +34,10 @@ module Impermium
       post("account/analyst_feedback", options, &block)
     end
 
-    REPORTER_USER_TYPE_VALUES = ["ENDUSER", "MODERATOR"]
     def account_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, user_id, desired_result, options={}, &block)
       options.merge!(
         :reporter_user_id => rep_usr_id,
-        :reporter_user_type => REPORTER_USER_TYPE_VALUES.include?(rep_usr_type) ? rep_usr_type : "ENDUSER",
+        :reporter_user_type => REPORTER_USER_TYPE_VALUES.include?(rep_usr_type) ? rep_usr_type : REPORTER_USER_TYPE_VALUES.first,
         :reporter_ip => reporter_ip,
         :user_id => user_id,
         :desired_result => desired_result
