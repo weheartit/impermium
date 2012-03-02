@@ -74,7 +74,7 @@ describe "user API section" do
 
     describe "successful account_login request" do
       use_vcr_cassette
-      it "should log the info and return an OK response" do
+      it "should return an OK response" do
         res = Impermium.account_login(@user_id, @ip_address)
         res.response_id.should be
         res.timestamp.should be
@@ -109,34 +109,60 @@ describe "user API section" do
     end
   end
 
-  describe "userfeedback method" do
+  describe "account_user_feedback method" do
     describe "missing arguments" do
-      use_vcr_cassette
-
-      it "should raise BadRequest error if 'reporter_user_id' is missing" do
-        lambda { Impermium.userfeedback("", "ADMINUSER", @ip_address, @user_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "missing reporter_user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_user_feedback(nil, "MODERATOR", 
+                   @ip_address, @user_id, @desired_result) 
+                 }.should raise_error(Impermium::BadRequest, /reporter_user_id/)
+        end
       end
 
-      it "should raise BadRequest error if 'reporter_user_type' is missing" do
-        lambda { Impermium.userfeedback(@user_id, "", @ip_address, @user_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "invalid reporter_user_type" do
+        use_vcr_cassette
+        it "should use default value" do
+          res = Impermium.account_user_feedback(@user_id, "NOT VALID", @ip_address, @user_id, @desired_result)
+          res.response_id.should be
+          res.timestamp.should be
+          res.status.should be_nil
+        end
       end
 
-      it "should raise BadRequest error if 'reporter_ip' is missing" do
-        lambda { Impermium.userfeedback(@user_id, "ADMINUSER", "", @user_id, @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "missing reporter_ip" do
+        use_vcr_cassette
+        it "should raise BadRequest" do
+          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+                   "", @user_id, @desired_result)
+                 }.should raise_error(Impermium::BadRequest, /reporter_ip/)
+        end
       end
 
-      it "should raise BadRequest error if 'user_id' is missing" do
-        lambda { Impermium.userfeedback(@user_id, "ADMINUSER", @ip_address, "", @desired_result) }.should raise_error(Impermium::BadRequest)
+      describe "missing user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+                   @ip_address, nil, @desired_result)
+                 }.should raise_error(Impermium::BadRequest, /user_id/)
+        end
+      end
+      
+      describe "missing desired_result" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+                   @ip_address, @user_id, nil) 
+                 }.should raise_error(Impermium::BadRequest, /desired_result/)
+        end
       end
     end
 
-    describe "successful userfeedback method request" do
+    describe "successful request" do
       use_vcr_cassette
-
-      it "should should be successful request" do
-        # res = Impermium.userfeedback("123", "ADMINUSER", @ip_address, @user_id, @desired_result)
-        res = Impermium.userfeedback(@user_id, "ENDUSER", @ip_address, @user_id, @desired_result)
-        res.response_id.start_with?("clid_boardreader").should be_true
+      it "should return an OK response" do
+        res = Impermium.account_user_feedback(@user_id, "ENDUSER", @ip_address, @user_id, @desired_result)
+        res.response_id.start_with?("CLID").should be_true
       end
     end
   end
