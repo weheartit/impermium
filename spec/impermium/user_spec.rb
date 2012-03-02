@@ -36,6 +36,24 @@ describe "user API section" do
       end
     end
   end
+  
+  describe "account_attempt method" do
+    describe "missing arguments" do
+      use_vcr_cassette
+      it "should raise BadRequest error if enduser_ip is missing" do
+        lambda { Impermium.account_attempt('') }.should raise_error(Impermium::BadRequest)
+      end
+    end
+
+    describe "successful account_attempt request" do
+      use_vcr_cassette
+      it "should log the attempt and return an OK response" do
+        res = Impermium.account_attempt(@ip_address)
+        res.response_id.should be
+        res.timestamp.should be
+      end
+    end
+  end
 
   describe "analystfeedback method" do
     describe "missing arguments" do
