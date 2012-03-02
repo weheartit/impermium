@@ -14,14 +14,14 @@ describe "user API section" do
       describe "missing user_id" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account(nil, @ip_address) }.should raise_error(Impermium::BadRequest)
+          lambda { Impermium.account(nil, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
         end
       end
       
       describe "missing enduser_ip" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account(@user_id, '') }.should raise_error(Impermium::BadRequest)
+          lambda { Impermium.account(@user_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
         end
       end
     end
@@ -41,7 +41,7 @@ describe "user API section" do
     describe "missing arguments" do
       use_vcr_cassette
       it "should raise BadRequest error if enduser_ip is missing" do
-        lambda { Impermium.account_attempt('') }.should raise_error(Impermium::BadRequest)
+        lambda { Impermium.account_attempt('') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
       end
     end
 
@@ -60,14 +60,14 @@ describe "user API section" do
       describe "missing user_id" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account_login(nil, @ip_address) }.should raise_error(Impermium::BadRequest)
+          lambda { Impermium.account_login(nil, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
         end
       end
       
       describe "missing enduser_ip" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account_login(@user_id, '') }.should raise_error(Impermium::BadRequest)
+          lambda { Impermium.account_login(@user_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
         end
       end
     end
