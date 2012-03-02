@@ -4,8 +4,10 @@ require "json"
 describe "user API section" do
   before(:each) do
     @user_id = "whi543"
+    @reporter_user_id = "whi789"
     @ip_address = "1.1.1.1"
     @analyst_id = "123456"
+    @profile_id = "whi543_profile"
     @desired_result = {:spam_classifier => { :label => "notspam" }}
   end
 
@@ -51,6 +53,8 @@ describe "user API section" do
         res = Impermium.account_attempt(@ip_address)
         res.response_id.should be
         res.timestamp.should be
+        res.status.should be_nil
+        res.message.should be_nil
       end
     end
   end
@@ -78,6 +82,8 @@ describe "user API section" do
         res = Impermium.account_login(@user_id, @ip_address)
         res.response_id.should be
         res.timestamp.should be
+        res.status.should be_nil
+        res.message.should be_nil
       end
     end
   end
@@ -105,6 +111,8 @@ describe "user API section" do
         res = Impermium.account_analyst_feedback(@analyst_id, @user_id, @desired_result)
         res.response_id.should be_true
         res.timestamp.should be_true
+        res.status.should be_nil
+        res.message.should be_nil
       end
     end
   end
@@ -123,17 +131,18 @@ describe "user API section" do
       describe "invalid reporter_user_type" do
         use_vcr_cassette
         it "should use default value" do
-          res = Impermium.account_user_feedback(@user_id, "NOT VALID", @ip_address, @user_id, @desired_result)
+          res = Impermium.account_user_feedback(@reporter_user_id, "NOT VALID", @ip_address, @user_id, @desired_result)
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
 
       describe "missing reporter_ip" do
         use_vcr_cassette
         it "should raise BadRequest" do
-          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+          lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",
                    "", @user_id, @desired_result)
                  }.should raise_error(Impermium::BadRequest, /reporter_ip/)
         end
@@ -142,7 +151,7 @@ describe "user API section" do
       describe "missing user_id" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+          lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",
                    @ip_address, nil, @desired_result)
                  }.should raise_error(Impermium::BadRequest, /user_id/)
         end
@@ -151,7 +160,7 @@ describe "user API section" do
       describe "missing desired_result" do
         use_vcr_cassette
         it "should raise BadRequest error" do
-          lambda { Impermium.account_user_feedback(@user_id, "MODERATOR",
+          lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",
                    @ip_address, @user_id, nil) 
                  }.should raise_error(Impermium::BadRequest, /desired_result/)
         end
@@ -161,9 +170,151 @@ describe "user API section" do
     describe "successful request" do
       use_vcr_cassette
       it "should return an OK response" do
-        res = Impermium.account_user_feedback(@user_id, "ENDUSER", @ip_address, @user_id, @desired_result)
+        res = Impermium.account_user_feedback(@reporter_user_id, "ENDUSER", @ip_address, @user_id, @desired_result)
         res.response_id.start_with?("CLID").should be_true
+        res.response_id.should be
+        res.timestamp.should be
+        res.status.should be_nil
       end
     end
   end
+  
+  describe "profile method" do
+    describe "missing arguments" do
+      describe "missing user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile(nil, @profile_id, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
+        end
+      end
+      
+      describe "missing profile_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile(@user_id, nil, @ip_address) }.should raise_error(Impermium::BadRequest, /profile_id/)
+        end
+      end
+      
+      describe "missing enduser_ip" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile(@user_id, @profile_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
+        end
+      end
+    end
+
+    describe "successful request" do
+      use_vcr_cassette
+      it "should mark user with zero spam classifier score" do
+        res = Impermium.profile(@user_id, @profile_id, @ip_address)
+        res.spam_classifier.score.to_i.should == 0
+        res.spam_classifier.label.should == "notspam"
+      end
+    end
+  end
+  
+  describe "profile_analyst_feedback method" do
+    describe 'missing params' do
+      describe "missing profile_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { 
+            Impermium.profile_analyst_feedback(nil, @analyst_id, @desired_result) 
+          }.should raise_error(Impermium::BadRequest, /profile_id/)
+        end
+      end
+      
+      describe "missing analyst_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { 
+            Impermium.profile_analyst_feedback(@profile_id, nil, @desired_result) 
+          }.should raise_error(Impermium::BadRequest, /analyst_id/)
+        end
+      end
+      
+      describe "missing desired_result" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { 
+            Impermium.profile_analyst_feedback(@profile_id, @analyst_id, nil)
+          }.should raise_error(Impermium::BadRequest, /desired_result/)
+        end
+      end
+      
+    end
+    describe "successful request" do
+      use_vcr_cassette
+      it "should return an OK response" do
+        res = Impermium.profile_analyst_feedback(@profile_id, @analyst_id, @desired_result)
+        res.response_id.should be
+        res.timestamp.should be
+        res.status.should be_nil
+        res.message.should be_nil
+      end
+    end
+  end
+  
+  describe "profile_user_feedback method" do
+    describe "missing arguments" do
+      describe "missing profile_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile_user_feedback(nil, @reporter_user_id,
+                  "MODERATOR", @ip_address, @desired_result) 
+                 }.should raise_error(Impermium::BadRequest, /profile_id/)
+        end
+      end
+      
+      describe "missing reporter_user_id" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile_user_feedback(@profile_id, nil, 
+                   "MODERATOR", @ip_address, @desired_result) 
+                 }.should raise_error(Impermium::BadRequest, /reporter_user_id/)
+        end
+      end
+
+      describe "invalid reporter_user_type" do
+        use_vcr_cassette
+        it "should use default value" do
+          res = Impermium.profile_user_feedback(@profile_id, @reporter_user_id, "NOT VALID", @ip_address, @desired_result)
+          res.response_id.should be
+          res.timestamp.should be
+          res.status.should be_nil
+          res.message.should be_nil
+        end
+      end
+
+      describe "missing reporter_ip" do
+        use_vcr_cassette
+        it "should raise BadRequest" do
+          lambda { Impermium.profile_user_feedback(@profile_id, @reporter_user_id,
+                   "MODERATOR", "", @desired_result)
+                 }.should raise_error(Impermium::BadRequest, /reporter_ip/)
+        end
+      end
+      
+      describe "missing desired_result" do
+        use_vcr_cassette
+        it "should raise BadRequest error" do
+          lambda { Impermium.profile_user_feedback(@profile_id, @reporter_user_id,
+                   "MODERATOR", @ip_address, nil) 
+                 }.should raise_error(Impermium::BadRequest, /desired_result/)
+        end
+      end
+    end
+
+    describe "successful request" do
+      use_vcr_cassette
+      it "should return an OK response" do
+        res = Impermium.profile_user_feedback(@profile_id, @reporter_user_id, "ENDUSER", @ip_address, @desired_result)
+        res.response_id.start_with?("CLID").should be_true
+        res.response_id.should be
+        res.timestamp.should be
+        res.status.should be_nil
+      end
+    end
+  end
+  
 end
