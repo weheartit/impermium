@@ -76,7 +76,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing comment_id" do
+        describe "missing listing_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /listing_id/)
