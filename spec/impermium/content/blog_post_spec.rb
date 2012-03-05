@@ -6,10 +6,11 @@ describe "content API section" do
     before(:each) do
       @user_id = "whi345"
       @analyst_id = "4n4l1s7"
+      @reporter_user_id = "r3p0rt3r"
       @ip = "1.1.1.1"
-      @content = "just a post"
+      @content = "just a simple post"
       @post_id = "just-a-post#984721"
-      @permalink = "http://example.com/2011/10/27/just_a_post"
+      @permalink = "http://example.com/2012/03/05/just_a_post"
       @url = "http://example.com"
       @desired_result = {:spam_classifier => { :label => "notspam" }}
     end
@@ -102,6 +103,68 @@ describe "content API section" do
           res.timestamp.should be_true
           res.status.should be_nil
           res.message.should be_nil
+        end
+      end
+    end
+    
+    describe "blog_post_user_feedback method" do
+      describe "missing arguments" do
+        describe "missing reporter_user_id" do
+          use_vcr_cassette
+          it "should raise BadRequest error" do
+            lambda { Impermium.blog_post_user_feedback(nil, "MODERATOR", 
+                     @ip, @post_id, @desired_result) 
+                   }.should raise_error(Impermium::BadRequest, /reporter_user_id/)
+          end
+        end
+
+        describe "invalid reporter_user_type" do
+          use_vcr_cassette
+          it "should use default value" do
+            res = Impermium.blog_post_user_feedback(@reporter_user_id, "NOT VALID", @ip, @post_id, @desired_result)
+            res.response_id.should be
+            res.timestamp.should be
+            res.status.should be_nil
+            res.message.should be_nil
+          end
+        end
+
+        describe "missing reporter_ip" do
+          use_vcr_cassette
+          it "should raise BadRequest" do
+            lambda { Impermium.blog_post_user_feedback(@reporter_user_id, "MODERATOR",
+                     "", @post_id, @desired_result)
+                   }.should raise_error(Impermium::BadRequest, /reporter_ip/)
+          end
+        end
+
+        describe "missing blog_post_id" do
+          use_vcr_cassette
+          it "should raise BadRequest error" do
+            lambda { Impermium.blog_post_user_feedback(@reporter_user_id, "MODERATOR",
+                     @ip, nil, @desired_result)
+                   }.should raise_error(Impermium::BadRequest, /blog_post_id/)
+          end
+        end
+      
+        describe "missing desired_result" do
+          use_vcr_cassette
+          it "should raise BadRequest error" do
+            lambda { Impermium.blog_post_user_feedback(@reporter_user_id, "MODERATOR",
+                     @ip, @user_id, nil) 
+                   }.should raise_error(Impermium::BadRequest, /desired_result/)
+          end
+        end
+      end
+
+      describe "successful request" do
+        use_vcr_cassette
+        it "should return an OK response" do
+          res = Impermium.blog_post_user_feedback(@reporter_user_id, "ENDUSER", @ip, @post_id, @desired_result)
+          res.response_id.start_with?("CLID").should be_true
+          res.response_id.should be
+          res.timestamp.should be
+          res.status.should be_nil
         end
       end
     end
