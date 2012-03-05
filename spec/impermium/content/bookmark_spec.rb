@@ -163,7 +163,7 @@ describe "content API section" do
 
         describe "missing reporter_ip" do
           use_vcr_cassette
-          it "should raise BadRequest" do
+          it "should raise BadRequest error" do
             lambda { Impermium.bookmark_user_feedback(@reporter_user_id, "MODERATOR",
                      "", @bookmark_id, @desired_result)
                    }.should raise_error(Impermium::BadRequest, /reporter_ip/)
