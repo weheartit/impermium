@@ -20,8 +20,8 @@ module Impermium
       end
     end
 
-    def connection
-      @connection ||= Faraday.new(:url => endpoint, :headers => default_headers) do |builder|
+    def api_connection
+      @api_connection ||= Faraday.new(:url => endpoint, :headers => default_headers) do |builder|
         builder.use Faraday::Response::Mashify
         builder.use Faraday::Response::ParseJson
         builder.use Faraday::Response::Raise4xx
@@ -32,7 +32,7 @@ module Impermium
     end
 
     def post(url, options={})
-      connection.post do |req|
+      api_connection.post do |req|
         req.url api_url(url)
         req.body = options
         req.headers['Content-Type'] = 'application/json'
