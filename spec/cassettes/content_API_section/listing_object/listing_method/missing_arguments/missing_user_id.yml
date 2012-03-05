@@ -1,0 +1,30 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/listing/3.1/REMOVED-API-KEY-VALUE/
+    body: ! '{"user_id":null,"listing_id":"78912li","content":"sales ad list","listing_permalink":"http://example.com/listings/78912li","enduser_ip":"1.1.1.1"}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 400
+      message: Bad Request
+    headers:
+      date:
+      - Mon, 05 Mar 2012 15:46:02 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"status":400,"hostname":"events2001.impermium.com","message":"Unable
+      to verify the schema of the event: (Required element ''user_id'' could not be
+      found)"}'
+    http_version: '1.1'

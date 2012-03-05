@@ -1,0 +1,28 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/bookmark/user_feedback/3.1/REMOVED-API-KEY-VALUE/
+    body: ! '{"reporter_user_id":"r3p0rt3r_ID","reporter_user_type":"ENDUSER","reporter_ip":"2.2.2.2","bookmark_id":"b00km4rk_ID","desired_result":{"spam_classifier":{"label":"notspam"}}}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 05 Mar 2012 15:45:35 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"timestamp":"20120305154535Z","response_id":"CLID-1253-EVENTS2001-0305154535-3FEFDDEC-66DA-11E1-89F4-014AFFBDFCB2"}'
+    http_version: '1.1'

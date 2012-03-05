@@ -1,0 +1,30 @@
+---
+- !ruby/struct:VCR::HTTPInteraction
+  request: !ruby/struct:VCR::Request
+    method: :post
+    uri: http://api-test.impermium.com:80/blog_post/analyst_feedback/3.1/REMOVED-API-KEY-VALUE/
+    body: ! '{"analyst_id":null,"blog_post_id":"just-a-post#984721","desired_result":{"spam_classifier":{"label":"notspam"}}}'
+    headers:
+      http-user-agent:
+      - Impermium Ruby Gem
+      http-accept:
+      - application/json
+      content-type:
+      - application/json
+  response: !ruby/struct:VCR::Response
+    status: !ruby/struct:VCR::ResponseStatus
+      code: 400
+      message: Bad Request
+    headers:
+      date:
+      - Mon, 05 Mar 2012 15:45:15 GMT
+      server:
+      - Apache/2.2.14 (Ubuntu)
+      transfer-encoding:
+      - chunked
+      content-type:
+      - application/json
+    body: ! '{"status":400,"hostname":"events2001.impermium.com","message":"Unable
+      to verify the schema of the event: (Required element ''analyst_id'' could not
+      be found)"}'
+    http_version: '1.1'
