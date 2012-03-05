@@ -1,18 +1,11 @@
 require "impermium/content/blog_post"
+require "impermium/content/bookmark"
 
 module Impermium
   module Content
     include BlogPost
+    include Bookmark
     
-    def bookmark(user_id, bookmark_id, bookmark_url, enduser_ip, options={}, &block)
-      options.merge!(
-        :user_id => user_id,
-        :bookmark_id => bookmark_id,
-        :bookmark_url => bookmark_url,
-        :enduser_ip => enduser_ip
-        )
-      post("content/bookmark", options, &block)
-    end
     
     def comment(user_id, comment_id, content, comment_permalink, article_permalink, enduser_ip, options={}, &block)
       options.merge!(
