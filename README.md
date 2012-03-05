@@ -46,45 +46,45 @@ Finally, Impermium client can be configured through block with:
 
 Each API method accepts mandatory arguments only, and have an options hash and a block as optional arguments. Here is the list of all supported methods and their mandatory arguments:
  
-* USER: 
-  + _Account:_
-    - `client.account(user_id, enduser_ip)`
-    - `client.account_attempt(enduser_ip)`
-    - `client.account_login(user_id, enduser_ip)`
-    - `client.account_analyst_feedback(analyst_id, user_id, desired_result)`
-    - `client.account_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, user_id, desired_result)`
+* __USER__
+    + __Account:__
+      - `client.account(user_id, enduser_ip)`
+      - `client.account_attempt(enduser_ip)`
+      - `client.account_login(user_id, enduser_ip)`
+      - `client.account_analyst_feedback(analyst_id, user_id, desired_result)`
+      - `client.account_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, user_id, desired_result)`
+      
+    + __Profile:__
+      - `client.profile(user_id, profile_id, enduser_ip)`
+      - `client.profile_analyst_feedback(profile_id, analyst_id, desired_result)`
+      - `client.profile_user_feedback(profile_id, reporter_user_id, reporter_user_type, reporter_ip, desired_result)`
+
+* __CONTENT__
+    + __Blog post:__
+      - `client.blog_post(user_id, blog_post_id, content, blog_post_permalink, blog_url, enduser_ip)`
+      - `client.blog_post_analyst_feedback(analyst_id, blog_post_id, desired_result)`
+      - `client.blog_post_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, blog_post_id, desired_result)`
   
-  + _Profile:_
-    - `client.profile(user_id, profile_id, enduser_ip)`
-    - `client.profile_analyst_feedback(profile_id, analyst_id, desired_result)`
-    - `client.profile_user_feedback(profile_id, reporter_user_id, reporter_user_type, reporter_ip, desired_result)`
-
-* CONTENT
-  + _Blog post:_
-    - `client.blog_post(user_id, blog_post_id, content, blog_post_permalink, blog_url, enduser_ip)`
-    - `client.blog_post_analyst_feedback(analyst_id, blog_post_id, desired_result)`
-    - `client.blog_post_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, blog_post_id, desired_result)`
-
-  + _Bookmark:_
-    - `client.bookmark(user_id, bookmark_id, bookmark_url, enduser_ip)`
-    - `client.bookmark_like(user_id, bookmark_id, bookmark_url, like_value, enduser_ip)`
-    - `client.bookmark_analyst_feedback(analyst_id, bookmark_id, desired_result)`
-    - `client.bookmark_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, bookmark_id, desired_result)`
-    
-  + _Comment:_
-    - `client.comment(user_id, comment_id, content, comment_permalink, article_permalink, enduser_ip)`
-    - `client.comment_analyst_feedback(analyst_id, comment_id, desired_result)`
-    - `client.comment_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, comment_id, desired_result)`
-    
-  + _Connection:_
-    - `client.connection(operation, connection_type, connection_id, requester_user_id, responder_user_id, enduser_ip)`
-    - `client.connection_analyst_feedback(analyst_id, connection_type, connection_id, desired_result)`
-    - `client.connection_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, connection_type, connection_id, desired_result)`
-    
-  + _Listing:_
-    - `client.listing(user_id, listing_id, content, listing_permalink, enduser_ip)`
-    - `client.listing_analyst_feedback(analyst_id, listing_id, desired_result)`
-    - `client.listing_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, listing_id, desired_result)`
+    + __Bookmark:__
+      - `client.bookmark(user_id, bookmark_id, bookmark_url, enduser_ip)`
+      - `client.bookmark_like(user_id, bookmark_id, bookmark_url, like_value, enduser_ip)`
+      - `client.bookmark_analyst_feedback(analyst_id, bookmark_id, desired_result)`
+      - `client.bookmark_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, bookmark_id, desired_result)`
+      
+    + __Comment:__
+      - `client.comment(user_id, comment_id, content, comment_permalink, article_permalink, enduser_ip)`
+      - `client.comment_analyst_feedback(analyst_id, comment_id, desired_result)`
+      - `client.comment_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, comment_id, desired_result)`
+      
+    + __Connection:__
+      - `client.connection(operation, connection_type, connection_id, requester_user_id, responder_user_id, enduser_ip)`
+      - `client.connection_analyst_feedback(analyst_id, connection_type, connection_id, desired_result)`
+      - `client.connection_user_feedback(reporter_user_id, reporter_user_type, reporter_ip, connection_type, connection_id, desired_result)`
+      
+    + __Listing:__
+      - `client.listing(user_id, listing_id, content, listing_permalink, enduser_ip)`
+      - `client.listing_analyst_feedback(analyst_id, listing_id, desired_result)`
+      - `client.listing_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, listing_id, desired_result)`
 
 Additional arguments can be passed through the hash which is the last argument for every method
 
