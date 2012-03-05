@@ -20,47 +20,47 @@ describe "content API section" do
         describe "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(nil, @post_id, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(nil, @post_id, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
         describe "missing blog_post_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, nil, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(@user_id, nil, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /blog_post_id/)
           end
         end
         
         describe "missing content" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, @post_id, nil, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(@user_id, @post_id, nil, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /content/)
           end
         end
       
         describe "missing blog_post_permalink" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, @post_id, @content, nil, @url, @ip) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(@user_id, @post_id, @content, nil, @url, @ip) }.should raise_error(Impermium::BadRequest, /blog_post_permalink/)
           end
         end
       
         describe "missing blog_url" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, nil, @ip) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, nil, @ip) }.should raise_error(Impermium::BadRequest, /blog_url/)
           end
         end
         
         describe "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, @url, nil) }.should raise_error(Impermium::BadRequest)
+            lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, @url, nil) }.should raise_error(Impermium::BadRequest, /enduser_ip/)
           end
         end
       end
 
-      describe "successful blogpost request" do
+      describe "successful blog_post request" do
         use_vcr_cassette
         it "should mark blog post with 'notspam' label" do
           res = Impermium.blog_post(@user_id, @post_id, @content, @permalink, @url, @ip)
