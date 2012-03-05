@@ -16,5 +16,27 @@ module Impermium
       post("connection", options, &block)
     end
     
+    def connection_analyst_feedback(analyst_id, connection_type, connection_id, desired_result, options={}, &block)
+      options.merge!(
+        :analyst_id => analyst_id,
+        :connection_type => connection_type,
+        :connection_id => connection_id,
+        :desired_result => desired_result
+        )
+      post("connection/analyst_feedback", options, &block)
+    end
+    
+    def connection_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, connection_type, connection_id, desired_result, options={}, &block)
+      options.merge!(
+        :reporter_user_id => rep_usr_id,
+        :reporter_user_type => REPORTER_USER_TYPE_VALUES.include?(rep_usr_type) ? rep_usr_type : REPORTER_USER_TYPE_VALUES.first,
+        :reporter_ip => reporter_ip,
+        :connection_type => connection_type,
+        :connection_id => connection_id,
+        :desired_result => desired_result
+        )
+      post("connection/user_feedback", options, &block)
+    end
+    
   end
 end
