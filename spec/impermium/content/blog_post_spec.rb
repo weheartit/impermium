@@ -151,7 +151,7 @@ describe "content API section" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post_user_feedback(@reporter_user_id, "MODERATOR",
-                     @ip, @user_id, nil) 
+                     @ip, @post_id, nil) 
                    }.should raise_error(Impermium::BadRequest, /desired_result/)
           end
         end
