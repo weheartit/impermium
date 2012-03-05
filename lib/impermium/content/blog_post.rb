@@ -12,5 +12,16 @@ module Impermium
       post("blog_post", options, &block)
     end
     
+    def blog_post_analyst_feedback(analyst_id, blog_post_id, desired_result, options={}, &block)
+      options.merge!(
+        :analyst_id => analyst_id,
+        :blog_post_id => blog_post_id,
+        :desired_result => desired_result
+        )
+      post("blog_post/analyst_feedback", options, &block)
+      
+    end
+    
+    
   end
 end
