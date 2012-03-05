@@ -6,11 +6,13 @@ Gem::Specification.new do |s|
   s.name        = "impermium"
   s.version     = Impermium::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Bosko Ivanisevic"]
-  s.email       = ["bosko.ivanisevic@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{Impermium API wrapper}
-  s.description = %q{Impermium API wrapper}
+  s.date = Time.now.strftime('%Y-%m-%d')
+  
+  s.authors     = ["Juanjo Bazán", "Bosko Ivanisevic", "Neil Berkman"]
+  s.email       = ["jjbazan@gmail.com"]
+  s.homepage    = "https://github.com/weheartit/impermium"
+  s.summary     = "Impermium API wrapper"
+  s.description = "Ruby wrapper for the Impermium social spam API"
 
   s.add_dependency "faraday", "~> 0.7.4"
   s.add_dependency "faraday_middleware", "~> 0.7.0"
