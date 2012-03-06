@@ -108,9 +108,11 @@ Any 4XX response will raise an Impermium Exception with the body of the response
 * A 401 status response from the impermium API will raise an `Impermium::UnauthorizedRequest`
 * A 403 status response from the impermium API will raise an `Impermium::ForbiddenRequest`
 * A 404 status response from the impermium API will raise an `Impermium::NotFoundRequest`
-  
+
 ## Credits
 
-Gem developed by [Juanjo Bazán](https://github.com/xuanxu) and [Boško Ivanišević](https://github.com/bosko) for spam control in [WeHeartIt.com](http://weheartit.com/).
+Here is the [list of contributors](https://github.com/weheartit/impermium/contributors).
 
-Copyright © 2012 WeHeartIt, released under the MIT license
+## License
+
+Copyright 2012 WHI Inc. (weheartit.com), released under the MIT license.
