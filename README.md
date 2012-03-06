@@ -111,6 +111,6 @@ Any 4XX response will raise an Impermium Exception with the body of the response
   
 ## Credits
 
-Gem initially developed by Bosko Ivanisevic, Juanjo Bazán and Neil Berkman for spam control in [WeHeartIt.com](http://weheartit.com/).
+Gem developed by [Juanjo Bazán](https://github.com/xuanxu) and [Boško Ivanišević](https://github.com/bosko) for spam control in [WeHeartIt.com](http://weheartit.com/).
 
 Copyright © 2012 WeHeartIt, released under the MIT license
