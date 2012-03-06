@@ -17,7 +17,7 @@ describe "content API section" do
     describe "listing method" do
       describe "missing arguments" do
         
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing(nil, @listing_id, @content, @listing_permalink, @ip) 
@@ -25,7 +25,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing listing_id" do
+        context "missing listing_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing(@user_id, nil, @content, @listing_permalink, @ip) 
@@ -33,7 +33,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing content" do
+        context "missing content" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing(@user_id, @listing_id, nil, @listing_permalink, @ip) 
@@ -41,7 +41,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing listing_permalink" do
+        context "missing listing_permalink" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing(@user_id, @listing_id, @content, nil, @ip) 
@@ -49,7 +49,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing(@user_id, @listing_id, @content, @listing_permalink, nil) 
@@ -69,21 +69,21 @@ describe "content API section" do
 
     describe "listing_analyst_feedback method" do
       describe "missing arguments" do
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_analyst_feedback(nil, @listing_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
       
-        describe "missing listing_id" do
+        context "missing listing_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /listing_id/)
           end
         end
         
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_analyst_feedback(@analyst_id, @listing_id, nil) }.should raise_error(Impermium::BadRequest, /desired_result/)
@@ -105,7 +105,7 @@ describe "content API section" do
     
     describe "listing_user_feedback method" do
       describe "missing arguments" do
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_user_feedback(nil, "MODERATOR", 
@@ -114,7 +114,7 @@ describe "content API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.listing_user_feedback(@reporter_user_id, "NOT VALID", @ip, @listing_id, @desired_result)
@@ -125,7 +125,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_user_feedback(@reporter_user_id, "MODERATOR",
@@ -134,7 +134,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing listing_id" do
+        context "missing listing_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_user_feedback(@reporter_user_id, "MODERATOR",
@@ -143,7 +143,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.listing_user_feedback(@reporter_user_id, "MODERATOR",

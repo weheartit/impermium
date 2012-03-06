@@ -18,7 +18,7 @@ describe "content API section" do
     describe "comment method" do
       describe "missing arguments" do
         
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(nil, @comment_id, @content, @comment_permalink, @article_permalink, @ip) 
@@ -26,7 +26,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing comment_id" do
+        context "missing comment_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(@user_id, nil, @content, @comment_permalink, @article_permalink, @ip) 
@@ -34,7 +34,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing content" do
+        context "missing content" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(@user_id, @comment_id, nil, @comment_permalink, @article_permalink, @ip) 
@@ -42,7 +42,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing comment_permalink" do
+        context "missing comment_permalink" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(@user_id, @comment_id, @content, nil, @article_permalink, @ip) 
@@ -50,7 +50,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing article_permalink" do
+        context "missing article_permalink" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(@user_id, @comment_id, @content, @comment_permalink, nil, @ip) 
@@ -58,7 +58,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment(@user_id, @comment_id, @content, @comment_permalink, @article_permalink, nil) 
@@ -78,21 +78,21 @@ describe "content API section" do
     
     describe "comment_analyst_feedback method" do
       describe "missing arguments" do
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_analyst_feedback(nil, @comment_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
       
-        describe "missing comment_id" do
+        context "missing comment_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /comment_id/)
           end
         end
         
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_analyst_feedback(@analyst_id, @comment_id, nil) }.should raise_error(Impermium::BadRequest, /desired_result/)
@@ -114,7 +114,7 @@ describe "content API section" do
     
     describe "comment_user_feedback method" do
       describe "missing arguments" do
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_user_feedback(nil, "MODERATOR", 
@@ -123,7 +123,7 @@ describe "content API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.comment_user_feedback(@reporter_user_id, "NOT VALID", @ip, @comment_id, @desired_result)
@@ -134,7 +134,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_user_feedback(@reporter_user_id, "MODERATOR",
@@ -143,7 +143,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing comment_id" do
+        context "missing comment_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_user_feedback(@reporter_user_id, "MODERATOR",
@@ -152,7 +152,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.comment_user_feedback(@reporter_user_id, "MODERATOR",

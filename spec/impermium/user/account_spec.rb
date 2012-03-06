@@ -14,14 +14,14 @@ describe "user API section" do
   
     describe "account method" do
       describe "missing arguments" do
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account(nil, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account(@user_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
@@ -62,14 +62,14 @@ describe "user API section" do
   
     describe "account_login method" do
       describe "missing arguments" do
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_login(nil, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_login(@user_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
@@ -91,14 +91,14 @@ describe "user API section" do
 
     describe "account_analyst_feedback method" do
       describe "missing arguments" do
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_analyst_feedback(nil, @user_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
       
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /user_id/)
@@ -120,7 +120,7 @@ describe "user API section" do
 
     describe "account_user_feedback method" do
       describe "missing arguments" do
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_user_feedback(nil, "MODERATOR", 
@@ -129,7 +129,7 @@ describe "user API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.account_user_feedback(@reporter_user_id, "NOT VALID", @ip_address, @user_id, @desired_result)
@@ -140,7 +140,7 @@ describe "user API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest" do
             lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",
@@ -149,7 +149,7 @@ describe "user API section" do
           end
         end
 
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",
@@ -158,7 +158,7 @@ describe "user API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.account_user_feedback(@reporter_user_id, "MODERATOR",

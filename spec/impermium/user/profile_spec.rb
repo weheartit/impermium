@@ -14,21 +14,21 @@ describe "user API section" do
 
     describe "profile method" do
       describe "missing arguments" do
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile(nil, @profile_id, @ip_address) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
-        describe "missing profile_id" do
+        context "missing profile_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile(@user_id, nil, @ip_address) }.should raise_error(Impermium::BadRequest, /profile_id/)
           end
         end
       
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile(@user_id, @profile_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
@@ -48,7 +48,7 @@ describe "user API section" do
   
     describe "profile_analyst_feedback method" do
       describe 'missing params' do
-        describe "missing profile_id" do
+        context "missing profile_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { 
@@ -57,7 +57,7 @@ describe "user API section" do
           end
         end
       
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { 
@@ -66,7 +66,7 @@ describe "user API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { 
@@ -90,7 +90,7 @@ describe "user API section" do
   
     describe "profile_user_feedback method" do
       describe "missing arguments" do
-        describe "missing profile_id" do
+        context "missing profile_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile_user_feedback(nil, @reporter_user_id,
@@ -99,7 +99,7 @@ describe "user API section" do
           end
         end
       
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile_user_feedback(@profile_id, nil, 
@@ -108,7 +108,7 @@ describe "user API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.profile_user_feedback(@profile_id, @reporter_user_id, "NOT VALID", @ip_address, @desired_result)
@@ -119,7 +119,7 @@ describe "user API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest" do
             lambda { Impermium.profile_user_feedback(@profile_id, @reporter_user_id,
@@ -128,7 +128,7 @@ describe "user API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.profile_user_feedback(@profile_id, @reporter_user_id,

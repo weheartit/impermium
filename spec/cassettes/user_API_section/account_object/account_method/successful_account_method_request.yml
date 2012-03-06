@@ -1,28 +1,38 @@
 ---
-- !ruby/struct:VCR::HTTPInteraction
-  request: !ruby/struct:VCR::Request
-    method: :post
-    uri: http://api-test.impermium.com:80/account/3.1/REMOVED-API-KEY-VALUE/
-    body: ! '{"user_id":"whi543","enduser_ip":"1.1.1.1"}'
+http_interactions:
+- request:
+    method: post
+    uri: http://api-test.impermium.com/account/3.1/REMOVED-API-KEY-VALUE/
+    body:
+      encoding: UTF-8
+      string: ! '{"user_id":"whi543","enduser_ip":"1.1.1.1"}'
     headers:
-      http-user-agent:
+      Http-User-Agent:
       - Impermium Ruby Gem
-      http-accept:
+      Http-Accept:
       - application/json
-      content-type:
+      Content-Type:
       - application/json
-  response: !ruby/struct:VCR::Response
-    status: !ruby/struct:VCR::ResponseStatus
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
       code: 200
       message: OK
     headers:
-      date:
-      - Mon, 05 Mar 2012 15:46:14 GMT
-      server:
+      Date:
+      - Tue, 06 Mar 2012 11:17:40 GMT
+      Server:
       - Apache/2.2.14 (Ubuntu)
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      content-type:
+      Content-Type:
       - application/json
-    body: ! '{"timestamp":"20120305154615Z","spam_classifier":{"label":"notspam","score":"-0.729003665653208","risk":"low"},"response_id":"CLID-1253-EVENTS2001-0305154614-572B6652-66DA-11E1-9078-014AFFBDFCB2"}'
-    http_version: '1.1'
+    body:
+      encoding: US-ASCII
+      string: ! '{"timestamp":"20120306111741Z","spam_classifier":{"label":"notspam","score":"-0.729003665653208","risk":"low"},"response_id":"CLID-1253-EVENTS2001-0306111741-FCF13DA2-677D-11E1-8E44-014AFFBDFCB2"}'
+    http_version: 
+  recorded_at: Tue, 06 Mar 2012 11:17:41 GMT
+recorded_with: VCR 2.0.0

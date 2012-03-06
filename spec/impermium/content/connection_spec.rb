@@ -16,7 +16,7 @@ describe "content API section" do
     describe "connection method" do
       describe "missing arguments" do
  
-        describe "invalid operation value" do
+        context "invalid operation value" do
           use_vcr_cassette
           it "should use default value and respond OK" do
             res= Impermium.connection('invalid', 'friend', @connection_id, @requester_user_id, @responder_user_id, @ip)
@@ -27,7 +27,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing connection_type" do
+        context "missing connection_type" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection('request', nil, @connection_id, @requester_user_id, @responder_user_id, @ip)
@@ -35,7 +35,7 @@ describe "content API section" do
           end
         end
         
-        describe "invalid connection_type value" do
+        context "invalid connection_type value" do
            use_vcr_cassette
            it "should raise BadRequest error" do
              lambda { Impermium.connection('request', 'no-valid', @connection_id, @requester_user_id, @responder_user_id, @ip)
@@ -43,7 +43,7 @@ describe "content API section" do
            end
          end
       
-        describe "missing connection_id" do
+        context "missing connection_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection('request', 'friend', nil, @requester_user_id, @responder_user_id, @ip)
@@ -51,7 +51,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing requester_user_id" do
+        context "missing requester_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection('request', 'friend', @connection_id, nil, @responder_user_id, @ip)
@@ -59,7 +59,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing responder_user_id" do
+        context "missing responder_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection('request', 'friend', @connection_id, @requester_user_id, nil, @ip)
@@ -67,7 +67,7 @@ describe "content API section" do
           end
         end
         
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection('request', 'follow', @connection_id, @requester_user_id, @responder_user_id, nil)
@@ -123,14 +123,14 @@ describe "content API section" do
     
     describe "connection_analyst_feedback method" do
       describe "missing arguments" do
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_analyst_feedback(nil, 'friend', @connection_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
         
-        describe "missing connection_type" do
+        context "missing connection_type" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_analyst_feedback(@analyst_id, nil, @connection_id, @desired_result) 
@@ -138,7 +138,7 @@ describe "content API section" do
           end
         end
         
-        describe "invalid connection_type value" do
+        context "invalid connection_type value" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_analyst_feedback(@analyst_id, 'invalid_type', @connection_id, @desired_result) 
@@ -146,14 +146,14 @@ describe "content API section" do
           end
         end
       
-        describe "missing connection_id" do
+        context "missing connection_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_analyst_feedback(@analyst_id, 'friend', nil, @desired_result) }.should raise_error(Impermium::BadRequest, /connection_id/)
           end
         end
         
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_analyst_feedback(@analyst_id, 'friend', @connection_id, nil) }.should raise_error(Impermium::BadRequest, /desired_result/)
@@ -175,7 +175,7 @@ describe "content API section" do
     
     describe "connection_user_feedback method" do
       describe "missing arguments" do
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(nil, "MODERATOR", 
@@ -184,7 +184,7 @@ describe "content API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.connection_user_feedback(@reporter_user_id, "NOT VALID", @ip, 'follow', @connection_id, @desired_result)
@@ -195,7 +195,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(@reporter_user_id, "MODERATOR",
@@ -204,7 +204,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing connection_type" do
+        context "missing connection_type" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(@reporter_user_id, "MODERATOR",
@@ -213,7 +213,7 @@ describe "content API section" do
           end
         end
         
-        describe "invalid connection_type value" do
+        context "invalid connection_type value" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(@reporter_user_id, "MODERATOR",
@@ -222,7 +222,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing connection_id" do
+        context "missing connection_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(@reporter_user_id, "MODERATOR",
@@ -231,7 +231,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.connection_user_feedback(@reporter_user_id, "MODERATOR",

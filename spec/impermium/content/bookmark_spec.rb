@@ -17,28 +17,28 @@ describe "content API section" do
     describe "bookmark method" do
       describe "missing arguments" do
         
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark(nil, @bookmark_id, @bookmark_url, @ip) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
-        describe "missing bookmark_id" do
+        context "missing bookmark_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark(@user_id, nil, @bookmark_url, @ip) }.should raise_error(Impermium::BadRequest, /bookmark_id/)
           end
         end
       
-        describe "missing bookmark_url" do
+        context "missing bookmark_url" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark(@user_id, @bookmark_id, nil, @ip) }.should raise_error(Impermium::BadRequest, /bookmark_url/)
           end
         end
         
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark(@user_id, @bookmark_id, @bookmark_url, nil) }.should raise_error(Impermium::BadRequest, /enduser_ip/)
@@ -58,35 +58,35 @@ describe "content API section" do
     describe "bookmark_like method" do
       describe "missing arguments" do
         
-        describe "missing user_id" do
+        context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_like(nil, @bookmark_id, @bookmark_url, @like_value, @ip) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
       
-        describe "missing bookmark_id" do
+        context "missing bookmark_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_like(@user_id, nil, @bookmark_url, @like_value, @ip) }.should raise_error(Impermium::BadRequest, /bookmark_id/)
           end
         end
       
-        describe "missing bookmark_url" do
+        context "missing bookmark_url" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_like(@user_id, @bookmark_id, nil, @like_value, @ip) }.should raise_error(Impermium::BadRequest, /bookmark_url/)
           end
         end
         
-        describe "missing like_value" do
+        context "missing like_value" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_like(@user_id, @bookmark_id, @bookmark_url, nil, @ip) }.should raise_error(Impermium::BadRequest, /like_value/)
           end
         end
         
-        describe "missing enduser_ip" do
+        context "missing enduser_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_like(@user_id, @bookmark_id, @bookmark_url, @like_value, nil) }.should raise_error(Impermium::BadRequest, /enduser_ip/)
@@ -105,21 +105,21 @@ describe "content API section" do
     
     describe "bookmark_analyst_feedback method" do
       describe "missing arguments" do
-        describe "missing analyst_id" do
+        context "missing analyst_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_analyst_feedback(nil, @bookmark_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
       
-        describe "missing bookmark_id" do
+        context "missing bookmark_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /bookmark_id/)
           end
         end
         
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_analyst_feedback(@analyst_id, @bookmark_id, nil) }.should raise_error(Impermium::BadRequest, /desired_result/)
@@ -141,7 +141,7 @@ describe "content API section" do
     
     describe "bookmark_user_feedback method" do
       describe "missing arguments" do
-        describe "missing reporter_user_id" do
+        context "missing reporter_user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_user_feedback(nil, "MODERATOR", 
@@ -150,7 +150,7 @@ describe "content API section" do
           end
         end
 
-        describe "invalid reporter_user_type" do
+        context "invalid reporter_user_type" do
           use_vcr_cassette
           it "should use default value" do
             res = Impermium.bookmark_user_feedback(@reporter_user_id, "NOT VALID", @ip, @bookmark_id, @desired_result)
@@ -161,7 +161,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing reporter_ip" do
+        context "missing reporter_ip" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_user_feedback(@reporter_user_id, "MODERATOR",
@@ -170,7 +170,7 @@ describe "content API section" do
           end
         end
 
-        describe "missing bookmark_id" do
+        context "missing bookmark_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_user_feedback(@reporter_user_id, "MODERATOR",
@@ -179,7 +179,7 @@ describe "content API section" do
           end
         end
       
-        describe "missing desired_result" do
+        context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.bookmark_user_feedback(@reporter_user_id, "MODERATOR",
