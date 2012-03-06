@@ -111,8 +111,8 @@ Any 4XX response will raise an Impermium Exception with the body of the response
 
 ## Credits ##
 
-Here is the [list of contributors](https://github.com/weheartit/impermium/contributors).
+Here is the [list of contributors](https://github.com/weheartit/impermium/contributors)\.
 
 ## License ##
 
-Copyright 2012 WHI Inc. ([weheartit.com](http://weheartit.com)), released under the MIT license.
+Copyright 2012 WHI Inc. \([weheartit.com](http://weheartit.com)\), released under the MIT license.
