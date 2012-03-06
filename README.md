@@ -1,14 +1,14 @@
-# Impermium
+# Impermium #
 
 Ruby wrapper for the [Impermium API](http://impermium.com).
 
 * gem version 1.0.0 supports the Impermium API version 3.1
 
-## Usage
+## Usage ##
 
 In order to use Impermium gem you must get an Impermium API key.
 
-### Instantiate and configure a client
+### Instantiate and configure a client ###
 
 The Impermium client can be instantiated and configured in several ways. A new client can be created with
 
@@ -42,7 +42,7 @@ Finally, Impermium client can be configured through a block with:
 
     client = Impermium.new
 
-### Calling API methods
+### Calling API methods  ###
 
 Each method accepts the mandatory arguments of the correspondent API call, and have an options hash and a block as optional arguments. Here is the list of all supported methods and their mandatory arguments:
  
@@ -98,7 +98,7 @@ If request headers have to be set it can be done through block
 
 You can find the complete arguments lists and types in the official Impermium API docs site.
 
-### Responses
+### Responses ###
 
 Any method call receiving a successful response from impermium API will return a Hash like structure containing the body of the response, typically including `response_id`, `timestamp` and posibly `spam_classifier` and any other additional classifiers.
 
@@ -109,11 +109,10 @@ Any 4XX response will raise an Impermium Exception with the body of the response
 * A 403 status response from the impermium API will raise an `Impermium::ForbiddenRequest`
 * A 404 status response from the impermium API will raise an `Impermium::NotFoundRequest`
 
-## Credits
+## Credits ##
 
 Here is the [list of contributors](https://github.com/weheartit/impermium/contributors).
 
-
-## License
+## License ##
 
 Copyright 2012 WHI Inc. ([weheartit.com](http://weheartit.com)), released under the MIT license.
