@@ -10,15 +10,15 @@ In order to use Impermium gem you must get an Impermium API key.
 
 ### Instantiate and configure a client ###
 
-The Impermium client can be instantiated and configured in several ways. A new client can be created with
+The Impermium client can be instantiated and configured in several ways. A new client can be created with:
 
     client = Impermium.new(:api_key => <your_api_key>)
 
-which is actually short way of 
+which is actually short for
 
     client = Impermium::Client.new(:api_key => <your_api_key>)
 
-Constructor accepts a hash of options that can be used to configure the Impermium client. Valid hash keys are
+Constructor accepts a hash of options that can be used to configure the Impermium client. Valid hash keys are:
 
 * `:adapter` (sets Faraday adapter)
 * `:api_version` (sets Impermium API version - default 3.1)
@@ -27,13 +27,13 @@ Constructor accepts a hash of options that can be used to configure the Impermiu
 * `:client_id` (sets client ID)
 * `:endpoint` (sets URL to Impermium server - default http://api.impermium.com)
 
-Either of these values can be set directly too:
+Any of these values can be set directly too:
 
 * client = Impermium.new
 * client.api_key = <your_api_key>
 * client.endpoint = "http://api-test.impermium.com"
 
-Finally, Impermium client can be configured through a block with:
+Finally, the Impermium client can be configured through a block with:
 
     Impermium.configure do |conf|
       conf.api_key = <your_api_key>
@@ -44,7 +44,7 @@ Finally, Impermium client can be configured through a block with:
 
 ### Calling API methods  ###
 
-Each method accepts the mandatory arguments of the correspondent API call, and have an options hash and a block as optional arguments. Here is the list of all supported methods and their mandatory arguments:
+Each method accepts the mandatory arguments of the corresponding API call, and takes an options hash and a block as optional arguments. Here is the list of all supported methods and their mandatory arguments:
  
 * __USER__
     + __Account:__
@@ -90,7 +90,7 @@ Additional arguments can be passed through the hash which is the last argument f
 
     client.account('33', '255.255.255.255', {:alias => "user33", :password_hash=>'7d222a5d269a'})
 
-If request headers have to be set it can be done through block
+If request headers have to be set it can be done through a block:
 
     Impermium.account('33', '255.255.255.255') do |req|
       req.headers = {:http_user_agent => "Impermium gem 1.0.0"}
@@ -100,7 +100,7 @@ You can find the complete arguments lists and types in the official Impermium AP
 
 ### Responses ###
 
-Any method call receiving a successful response from impermium API will return a Hash like structure containing the body of the response, typically including `response_id`, `timestamp` and posibly `spam_classifier` and any other additional classifiers.
+Any method call receiving a successful response from impermium API will return a Hash-like structure containing the body of the response, typically including `response_id`, `timestamp` and possibly `spam_classifier` and any other additional classifiers.
 
 Any 4XX response will raise an Impermium Exception with the body of the response in the error message.
 
