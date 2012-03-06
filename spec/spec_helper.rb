@@ -13,9 +13,9 @@ else
   puts "WARNING: No configuration file found. API key must be set before tests are started"
 end
 
-VCR.config do |vcr|
+VCR.configure do |vcr|
   vcr.cassette_library_dir = "spec/cassettes"
-  vcr.stub_with :webmock
+  vcr.hook_into :webmock
   vcr.default_cassette_options = { :record => :once }
 
   vcr.before_record do |vc|
