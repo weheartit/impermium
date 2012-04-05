@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Impermium::VERSION
   s.platform    = Gem::Platform::RUBY
   s.date = Time.now.strftime('%Y-%m-%d')
-  
+
   s.authors     = ["Juanjo Bazán", "Bosko Ivanisevic", "Neil Berkman"]
   s.email       = ["jjbazan@gmail.com"]
   s.homepage    = "https://github.com/weheartit/impermium"
@@ -17,13 +17,13 @@ Gem::Specification.new do |s|
   s.add_dependency "faraday", "~> 0.7.4"
   s.add_dependency "faraday_middleware", "~> 0.7.0"
   s.add_dependency "hashie", "~> 1.1.0"
-  s.add_dependency "yajl-ruby", "~> 0.8.3"
+  s.add_dependency "yajl-ruby", "~> 1.1.0"
   s.add_dependency "multi_json"
 
   s.add_development_dependency "rspec", "~> 2.8.0"
   s.add_development_dependency "webmock", "~> 1.8.1"
   s.add_development_dependency "vcr", "~> 2.0.0"
- 
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
