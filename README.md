@@ -3,6 +3,7 @@
 Ruby wrapper for the [Impermium API](http://impermium.com).
 
 * gem version 1.0.0 supports the Impermium API version 3.1
+* gem version 1.1.0 supports the Impermium API version 3.1 (upgraded hashie and yajl-ruby gems)
 
 ## Usage ##
 
