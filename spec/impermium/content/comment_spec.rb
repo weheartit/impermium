@@ -57,14 +57,15 @@ describe "content API section" do
                    }.should raise_error(Impermium::BadRequest, /article_permalink/)
           end
         end
-        
-        context "missing enduser_ip" do
-          use_vcr_cassette
-          it "should raise BadRequest error" do
-            lambda { Impermium.comment(@user_id, @comment_id, @content, @comment_permalink, @article_permalink, nil) 
-                   }.should raise_error(Impermium::BadRequest, /enduser_ip/)
-          end
-        end
+
+        # It's marked as mandatory in the API docs, but currently it is not.
+        # context "missing enduser_ip" do
+        #   use_vcr_cassette
+        #   it "should raise BadRequest error" do
+        #     lambda { Impermium.comment(@user_id, @comment_id, @content, @comment_permalink, @article_permalink, nil) 
+        #            }.should raise_error(Impermium::BadRequest, /enduser_ip/)
+        #   end
+        # end
       end
 
       describe "successful request" do
@@ -166,10 +167,10 @@ describe "content API section" do
         use_vcr_cassette
         it "should return an OK response" do
           res = Impermium.comment_user_feedback(@reporter_user_id, "ENDUSER", @ip, @comment_id, @desired_result)
-          res.response_id.start_with?("CLID").should be_true
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
     end

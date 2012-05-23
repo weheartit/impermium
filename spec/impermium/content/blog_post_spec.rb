@@ -17,48 +17,49 @@ describe "content API section" do
 
     describe "blog_post method" do
       describe "missing arguments" do
-        
+
         context "missing user_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post(nil, @post_id, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
-      
+
         context "missing blog_post_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post(@user_id, nil, @content, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /blog_post_id/)
           end
         end
-        
+
         context "missing content" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post(@user_id, @post_id, nil, @permalink, @url, @ip) }.should raise_error(Impermium::BadRequest, /content/)
           end
         end
-      
+
         context "missing blog_post_permalink" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post(@user_id, @post_id, @content, nil, @url, @ip) }.should raise_error(Impermium::BadRequest, /blog_post_permalink/)
           end
         end
-      
+
         context "missing blog_url" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, nil, @ip) }.should raise_error(Impermium::BadRequest, /blog_url/)
           end
         end
-        
-        context "missing enduser_ip" do
-          use_vcr_cassette
-          it "should raise BadRequest error" do
-            lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, @url, nil) }.should raise_error(Impermium::BadRequest, /enduser_ip/)
-          end
-        end
+
+        # It's marked as mandatory in the API docs, but currently it is not.
+        # context "missing enduser_ip" do
+        #   use_vcr_cassette
+        #   it "should raise BadRequest error" do
+        #     lambda { Impermium.blog_post(@user_id, @post_id, @content, @permalink, @url, nil) }.should raise_error(Impermium::BadRequest, /enduser_ip/)
+        #   end
+        # end
       end
 
       describe "successful blog_post request" do
@@ -70,7 +71,7 @@ describe "content API section" do
         end
       end
     end
-    
+
     describe "blog_post_analyst_feedback method" do
       describe "missing arguments" do
         context "missing analyst_id" do
@@ -79,14 +80,14 @@ describe "content API section" do
             lambda { Impermium.blog_post_analyst_feedback(nil, @post_id, @desired_result) }.should raise_error(Impermium::BadRequest, /analyst_id/)
           end
         end
-      
+
         context "missing blog_post_id" do
           use_vcr_cassette
           it "should raise BadRequest error" do
             lambda { Impermium.blog_post_analyst_feedback(@analyst_id, nil, @desired_result) }.should raise_error(Impermium::BadRequest, /blog_post_id/)
           end
         end
-        
+
         context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
@@ -94,7 +95,7 @@ describe "content API section" do
           end
         end
       end
-      
+
       describe "successful request" do
         use_vcr_cassette
         it "should return an OK response" do
@@ -106,7 +107,7 @@ describe "content API section" do
         end
       end
     end
-    
+
     describe "blog_post_user_feedback method" do
       describe "missing arguments" do
         context "missing reporter_user_id" do
@@ -146,7 +147,7 @@ describe "content API section" do
                    }.should raise_error(Impermium::BadRequest, /blog_post_id/)
           end
         end
-      
+
         context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
@@ -161,10 +162,10 @@ describe "content API section" do
         use_vcr_cassette
         it "should return an OK response" do
           res = Impermium.blog_post_user_feedback(@reporter_user_id, "ENDUSER", @ip, @post_id, @desired_result)
-          res.response_id.start_with?("CLID").should be_true
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
     end

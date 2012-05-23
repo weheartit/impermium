@@ -157,10 +157,10 @@ describe "content API section" do
         use_vcr_cassette
         it "should return an OK response" do
           res = Impermium.listing_user_feedback(@reporter_user_id, "ENDUSER", @ip, @listing_id, @desired_result)
-          res.response_id.start_with?("CLID").should be_true
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
     end

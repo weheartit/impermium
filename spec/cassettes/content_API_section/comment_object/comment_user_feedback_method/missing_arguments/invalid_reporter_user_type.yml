@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 06 Mar 2012 11:17:09 GMT
+      - Tue, 22 May 2012 09:47:20 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
@@ -32,7 +32,7 @@ http_interactions:
       - application/json
     body:
       encoding: US-ASCII
-      string: ! '{"timestamp":"20120306111709Z","response_id":"CLID-1253-EVENTS2001-0306111709-EA6CE262-677D-11E1-A014-014AFFBDFCB2"}'
+      string: ! '{"4.0":{"tags":[]},"timestamp":"20120522094720Z","event_type":"comment.user_feedback","client_id":"1253","hostname":"events2001.impermium.com","response_id":"1FD6D352-A3F3-11E1-A76B-AF4BFFBDFCB2"}'
     http_version: 
-  recorded_at: Tue, 06 Mar 2012 11:17:10 GMT
-recorded_with: VCR 2.0.0
+  recorded_at: Tue, 22 May 2012 09:47:20 GMT
+recorded_with: VCR 2.0.1

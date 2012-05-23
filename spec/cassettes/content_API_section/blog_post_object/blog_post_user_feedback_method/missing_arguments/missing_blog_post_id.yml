@@ -23,7 +23,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Tue, 06 Mar 2012 11:16:47 GMT
+      - Tue, 22 May 2012 09:46:56 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Connection:
@@ -34,9 +34,9 @@ http_interactions:
       - application/json
     body:
       encoding: US-ASCII
-      string: ! '{"status":400,"hostname":"events2001.impermium.com","message":"Unable
+      string: ! '{"status":400,"response_id":"1153540E-A3F3-11E1-86FA-AF4BFFBDFCB2","hostname":"events2001.impermium.com","message":"Unable
         to verify the schema of the event: (Required element ''blog_post_id'' could
         not be found)"}'
     http_version: 
-  recorded_at: Tue, 06 Mar 2012 11:16:47 GMT
-recorded_with: VCR 2.0.0
+  recorded_at: Tue, 22 May 2012 09:46:56 GMT
+recorded_with: VCR 2.0.1

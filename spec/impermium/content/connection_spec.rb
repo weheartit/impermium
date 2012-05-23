@@ -212,7 +212,7 @@ describe "content API section" do
                    }.should raise_error(Impermium::BadRequest, /connection_type/)
           end
         end
-        
+
         context "invalid connection_type value" do
           use_vcr_cassette
           it "should raise BadRequest error" do
@@ -230,7 +230,7 @@ describe "content API section" do
                    }.should raise_error(Impermium::BadRequest, /connection_id/)
           end
         end
-      
+
         context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
@@ -245,10 +245,10 @@ describe "content API section" do
         use_vcr_cassette
         it "should return an OK response" do
           res = Impermium.connection_user_feedback(@reporter_user_id, "ENDUSER", @ip, 'follow', @connection_id, @desired_result)
-          res.response_id.start_with?("CLID").should be_true
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
     end

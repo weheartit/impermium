@@ -27,6 +27,13 @@ describe "user API section" do
             lambda { Impermium.account(@user_id, '') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
           end
         end
+        
+        context "invalid enduser_ip" do
+          use_vcr_cassette
+          it "should raise BadRequest error" do
+            lambda { Impermium.account(@user_id, '127.0.0.1') }.should raise_error(Impermium::BadRequest, /enduser_ip/)
+          end
+        end
       end
 
       describe "successful account method request" do
@@ -157,7 +164,7 @@ describe "user API section" do
                    }.should raise_error(Impermium::BadRequest, /user_id/)
           end
         end
-      
+
         context "missing desired_result" do
           use_vcr_cassette
           it "should raise BadRequest error" do
@@ -172,10 +179,10 @@ describe "user API section" do
         use_vcr_cassette
         it "should return an OK response" do
           res = Impermium.account_user_feedback(@reporter_user_id, "ENDUSER", @ip_address, @user_id, @desired_result)
-          res.response_id.start_with?("CLID").should be_true
           res.response_id.should be
           res.timestamp.should be
           res.status.should be_nil
+          res.message.should be_nil
         end
       end
     end
