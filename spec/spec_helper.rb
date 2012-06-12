@@ -3,14 +3,14 @@ require 'impermium'
 require "vcr"
 require "psych"
 
-conf_file = File.join(File.expand_path("..", __FILE__), "configuration.yml")
+conf_file = File.join(File.dirname(__FILE__), "configuration.yml")
 conf = {}
 if File.exist?(conf_file)
   conf = Psych.load_file(conf_file)
   Impermium.api_key = conf[:api_key]
   Impermium.endpoint = conf[:endpoint]
 else
-  puts "WARNING: No configuration file found. API key must be set before tests are started"
+  raise "WARNING: No configuration file found. API key must be set before tests are started"
 end
 
 VCR.configure do |vcr|

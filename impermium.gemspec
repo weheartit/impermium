@@ -14,10 +14,8 @@ Gem::Specification.new do |s|
   s.summary     = "Impermium API wrapper"
   s.description = "Ruby wrapper for the Impermium social spam API"
 
-  s.add_dependency "faraday", "~> 0.7.4"
-  s.add_dependency "faraday_middleware", "~> 0.7.0"
+  s.add_dependency "faraday_middleware", ">= 0.7.0"
   s.add_dependency "hashie", "~> 1.2.0"
-  s.add_dependency "yajl-ruby", "~> 1.1.0"
   s.add_dependency "multi_json"
 
   s.add_development_dependency "rspec", "~> 2.8.0"
