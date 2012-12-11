@@ -6,8 +6,8 @@ describe "client configuration" do
     let(:keys)   { Impermium::Configuration::VALID_CONFIG_KEYS }
     let(:client) { Impermium.new }
 
-    it "should support current API version: 3.1" do
-      client.api_version.should == '3.1'
+    it "should support current API version: 4.0" do
+      client.api_version.should == '4.0'
     end
 
     describe "configuration attributes" do

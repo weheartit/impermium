@@ -10,7 +10,7 @@ module Impermium
     ].freeze
 
     DEFAULT_ADAPTER = :net_http
-    DEFAULT_API_VERSION = "3.1"
+    DEFAULT_API_VERSION = "4.0"
     DEFAULT_API_KEY = nil
     DEFAULT_CLIENT_NAME = nil
     DEFAULT_CLIENT_ID = nil

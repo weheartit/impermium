@@ -5,12 +5,14 @@ require "impermium/configuration"
 require "impermium/content"
 require "impermium/errors"
 require "impermium/user"
+require "impermium/messaging"
 require "faraday/raise_4xx"
 
 module Impermium
   class Client
     include Configuration
     include Content
+    include Messaging
     include User
     
     def initialize(options = {})
@@ -41,10 +43,7 @@ module Impermium
     end
 
     def api_url(request_path)
-      url = URI.join(endpoint,
-        request_path[-1] == '/' ? request_path  : request_path + "/",
-        api_version + "/",
-        api_key + "/").to_s
+      URI.join(endpoint, api_version + "/", api_key + "/", request_path[-1] == '/' ? request_path  : request_path + "/").to_s
     end
 
     private
