@@ -8,7 +8,7 @@ module Impermium
         :profile_id => profile_id,
         :enduser_ip => enduser_ip
         )
-      post("profile", options, &block)
+      api_post("profile", options, &block)
     end
     
     def profile_analyst_feedback(profile_id, analyst_id, desired_result, options={}, &block)
@@ -17,7 +17,7 @@ module Impermium
         :analyst_id => analyst_id,
         :desired_result => desired_result
         )
-      post("profile/analyst_feedback", options, &block)
+      api_post("profile/analyst_feedback", options, &block)
     end
     
     def profile_user_feedback(profile_id, rep_usr_id, rep_usr_type, reporter_ip, desired_result, options={}, &block)
@@ -28,7 +28,7 @@ module Impermium
         :reporter_ip => reporter_ip,
         :desired_result => desired_result
         )
-      post("profile/user_feedback", options, &block)
+      api_post("profile/user_feedback", options, &block)
     end
     
   end

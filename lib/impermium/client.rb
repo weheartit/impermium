@@ -43,7 +43,6 @@ module Impermium
       end.body
       Impermium::Response.new(resp)
     end
-    alias_method(:post, :api_post)
 
     def api_url(request_path)
       URI.join(endpoint, api_version + "/", api_key + "/", request_path[-1] == '/' ? request_path  : request_path + "/").to_s

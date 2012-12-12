@@ -7,14 +7,14 @@ module Impermium
         :user_id => user_id,
         :enduser_ip => enduser_ip
         )
-      post("account", options, &block)
+      api_post("account", options, &block)
     end
     
     def account_attempt(enduser_ip, options={}, &block)
       options.merge!(
         :enduser_ip => enduser_ip
         )
-      post("account/attempt", options, &block)
+      api_post("account/attempt", options, &block)
     end
     
     def account_login(user_id, enduser_ip, options={}, &block)
@@ -22,7 +22,7 @@ module Impermium
         :user_id => user_id,
         :enduser_ip => enduser_ip
         )
-      post("account/login", options, &block)
+      api_post("account/login", options, &block)
     end
 
     def account_analyst_feedback(analyst_id, user_id, desired_result, options={}, &block)
@@ -31,7 +31,7 @@ module Impermium
         :user_id => user_id,
         :desired_result => desired_result
         )
-      post("account/analyst_feedback", options, &block)
+      api_post("account/analyst_feedback", options, &block)
     end
 
     def account_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, user_id, desired_result, options={}, &block)
@@ -42,9 +42,7 @@ module Impermium
         :user_id => user_id,
         :desired_result => desired_result
         )
-      post("account/user_feedback", options, &block)
+      api_post("account/user_feedback", options, &block)
     end
-    
-    
   end
 end

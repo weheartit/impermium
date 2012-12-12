@@ -10,7 +10,7 @@ module Impermium
         :listing_permalink => listing_permalink,
         :enduser_ip => enduser_ip
         )
-      post("listing", options, &block)
+      api_post("listing", options, &block)
     end
     
     def listing_analyst_feedback(analyst_id, listing_id, desired_result, options={}, &block)
@@ -19,7 +19,7 @@ module Impermium
         :listing_id => listing_id,
         :desired_result => desired_result
         )
-      post("listing/analyst_feedback", options, &block)
+      api_post("listing/analyst_feedback", options, &block)
     end
     
     def listing_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, listing_id, desired_result, options={}, &block)
@@ -30,7 +30,7 @@ module Impermium
         :listing_id => listing_id,
         :desired_result => desired_result
         )
-      post("listing/user_feedback", options, &block)
+      api_post("listing/user_feedback", options, &block)
     end
     
   end

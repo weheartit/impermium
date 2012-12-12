@@ -6,7 +6,7 @@ module Impermium
         :message_id => message_id,
         :content => content
       )
-      post('message', options, &block)
+      api_post('message', options, &block)
     end
   end
 end

@@ -11,7 +11,7 @@ module Impermium
         :article_permalink => article_permalink,
         :enduser_ip => enduser_ip
         )
-      post("comment", options, &block)
+      api_post("comment", options, &block)
     end
     
     def comment_analyst_feedback(analyst_id, comment_id, desired_result, options={}, &block)
@@ -20,7 +20,7 @@ module Impermium
         :comment_id => comment_id,
         :desired_result => desired_result
         )
-      post("comment/analyst_feedback", options, &block)
+      api_post("comment/analyst_feedback", options, &block)
     end
     
     def comment_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, comment_id, desired_result, options={}, &block)
@@ -31,7 +31,7 @@ module Impermium
         :comment_id => comment_id,
         :desired_result => desired_result
         )
-      post("comment/user_feedback", options, &block)
+      api_post("comment/user_feedback", options, &block)
     end
     
   end

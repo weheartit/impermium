@@ -13,7 +13,7 @@ module Impermium
         :responder_user_id => responder_user_id,
         :enduser_ip => enduser_ip
         )
-      post("connection", options, &block)
+      api_post("connection", options, &block)
     end
     
     def connection_analyst_feedback(analyst_id, connection_type, connection_id, desired_result, options={}, &block)
@@ -23,7 +23,7 @@ module Impermium
         :connection_id => connection_id,
         :desired_result => desired_result
         )
-      post("connection/analyst_feedback", options, &block)
+      api_post("connection/analyst_feedback", options, &block)
     end
     
     def connection_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, connection_type, connection_id, desired_result, options={}, &block)
@@ -35,7 +35,7 @@ module Impermium
         :connection_id => connection_id,
         :desired_result => desired_result
         )
-      post("connection/user_feedback", options, &block)
+      api_post("connection/user_feedback", options, &block)
     end
     
   end
