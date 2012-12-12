@@ -1,4 +1,4 @@
-require "impermium/content/blog_post"
+require "impermium/content/post"
 require "impermium/content/url"
 require "impermium/content/comment"
 require "impermium/content/connection"
@@ -6,7 +6,7 @@ require "impermium/content/listing"
 
 module Impermium
   module Content
-    include BlogPost
+    include Post
     include URL
     include Comment
     include Connection
