@@ -2,15 +2,14 @@ require "spec_helper"
 require "json"
 
 describe "content API section" do
-  describe "bookmark object" do
+  describe "url object" do
     before(:each) do
       @user_id = "whi777"
       @analyst_id = "4n4l1s7_ID"
       @reporter_user_id = "r3p0rt3r_ID"
       @ip = "2.2.2.2"
       @url = "http://example.com/category/book/marks/33?query=whi"
-      @like_value = "1"
-      @desired_result = {:spam_classifier => { :label => "notspam" }}
+      @desired_result = { :tags => [ "spam" ] }
     end
 
     describe "url method" do
@@ -34,7 +33,7 @@ describe "content API section" do
       end
     end
 
-    describe "bookmark_user_feedback method" do
+    describe "url_user_feedback method" do
       describe "successful request" do
         use_vcr_cassette
         it "should return an OK response" do

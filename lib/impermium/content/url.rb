@@ -1,5 +1,5 @@
 module Impermium
-  module Bookmark
+  module URL
     REPORTER_USER_TYPE_VALUES = ["ENDUSER", "MODERATOR"] # => default first
     
     def url(user_id, url, options={}, &block)
