@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: http://api-test.impermium.com/blog_post/user_feedback/3.1/REMOVED-API-KEY-VALUE/
+    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/post/user_feedback/
     body:
       encoding: UTF-8
       string: ! '{"reporter_user_id":"r3p0rt3r","reporter_user_type":"ENDUSER","reporter_ip":"1.1.1.1","blog_post_id":"just-a-post#984721","desired_result":{"spam_classifier":{"label":"notspam"}}}'
@@ -23,16 +23,22 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 22 May 2012 09:46:57 GMT
+      - Wed, 12 Dec 2012 00:06:00 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
       - chunked
       Content-Type:
       - application/json
+      Connection:
+      - Keep-alive
+      Keep-Alive:
+      - timeout=15, max=100
+      Via:
+      - 1.1 ID-5003323700470671 uproxy-2
     body:
       encoding: US-ASCII
-      string: ! '{"4.0":{"tags":[]},"timestamp":"20120522094657Z","event_type":"blog_post.user_feedback","client_id":"1253","hostname":"events2001.impermium.com","response_id":"120DBC90-A3F3-11E1-8510-AF4BFFBDFCB2"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121212000601Z","event_type":"generic_post.user_feedback","status":200,"client_id":"1253","hostname":"events1001.impermium.com","response_id":"B63E36C2-43EF-11E2-8D65-9F75CCDB01D8"}'
     http_version: 
-  recorded_at: Tue, 22 May 2012 09:46:57 GMT
+  recorded_at: Wed, 12 Dec 2012 00:06:05 GMT
 recorded_with: VCR 2.0.1

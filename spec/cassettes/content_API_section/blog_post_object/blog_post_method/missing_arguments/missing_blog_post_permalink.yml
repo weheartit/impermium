@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: http://api-test.impermium.com/blog_post/3.1/REMOVED-API-KEY-VALUE/
+    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/post/
     body:
       encoding: UTF-8
       string: ! '{"user_id":"whi345","blog_post_id":"just-a-post#984721","content":"just
@@ -20,24 +20,26 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       Date:
-      - Tue, 22 May 2012 09:46:49 GMT
+      - Wed, 12 Dec 2012 14:53:37 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
-      Connection:
-      - close
       Transfer-Encoding:
       - chunked
       Content-Type:
       - application/json
+      Connection:
+      - Keep-alive
+      Keep-Alive:
+      - timeout=15, max=100
+      Via:
+      - 1.1 ID-5003323700470671 uproxy-2
     body:
       encoding: US-ASCII
-      string: ! '{"status":400,"response_id":"0D23800C-A3F3-11E1-9B34-AF4BFFBDFCB2","hostname":"events2001.impermium.com","message":"Unable
-        to verify the schema of the event: (Required element ''blog_post_permalink''
-        could not be found)"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121212145337Z","event_type":"generic_post.create","status":200,"client_id":"1253","hostname":"events1003.impermium.com","response_id":"B56C48C0-446B-11E2-9BB2-2CC381A98F61"}'
     http_version: 
-  recorded_at: Tue, 22 May 2012 09:46:49 GMT
+  recorded_at: Wed, 12 Dec 2012 14:53:41 GMT
 recorded_with: VCR 2.0.1
