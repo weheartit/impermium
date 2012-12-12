@@ -9,7 +9,7 @@ describe Impermium::Profile do
     @ip_address = "1.1.1.1"
     @analyst_id = "123456"
     @profile_id = "whi543_profile"
-    @desired_result = {:spam_classifier => { :label => "notspam" }}
+    @desired_result = {:tags => ['spam'] }
   end
 
   describe ".profile" do
