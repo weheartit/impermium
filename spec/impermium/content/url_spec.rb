@@ -2,7 +2,8 @@ require "spec_helper"
 require "json"
 
 describe "content API section" do
-  describe "url object" do
+
+  describe Impermium::URL do
     before(:each) do
       @user_id = "whi777"
       @analyst_id = "4n4l1s7_ID"
