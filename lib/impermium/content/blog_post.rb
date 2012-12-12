@@ -11,7 +11,7 @@ module Impermium
         :blog_url => blog_url,
         :enduser_ip => enduser_ip
         )
-      post("blog_post", options, &block)
+      api_post("post", options, &block)
     end
     
     def blog_post_analyst_feedback(analyst_id, blog_post_id, desired_result, options={}, &block)
@@ -20,7 +20,7 @@ module Impermium
         :blog_post_id => blog_post_id,
         :desired_result => desired_result
         )
-      post("blog_post/analyst_feedback", options, &block)
+      api_post("post/analyst_feedback", options, &block)
     end
     
     def blog_post_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, blog_post_id, desired_result, options={}, &block)
@@ -31,7 +31,7 @@ module Impermium
         :blog_post_id => blog_post_id,
         :desired_result => desired_result
         )
-      post("blog_post/user_feedback", options, &block)
+      api_post("post/user_feedback", options, &block)
     end
     
   end
