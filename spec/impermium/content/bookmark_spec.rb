@@ -38,7 +38,7 @@ describe "content API section" do
       describe "successful request" do
         use_vcr_cassette
         it "should return an OK response" do
-          res = Impermium.url_user_feedback(@user_id, "ENDUSER", @ip, @bookmark_id, @desired_result)
+          res = Impermium.url_user_feedback(@user_id, @url, "ENDUSER", @desired_result)
           res.response_id.should be
           res.timestamp.should be
         end
