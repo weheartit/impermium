@@ -1,9 +1,9 @@
-require "impermium/user/account"
+require "impermium/user/signup"
 require "impermium/user/profile"
 
 module Impermium
   module User    
-    include Account
+    include Signup
     include Profile
   end
 end
