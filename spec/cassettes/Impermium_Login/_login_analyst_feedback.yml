@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 13 Dec 2012 18:28:17 GMT
+      - Thu, 13 Dec 2012 19:03:39 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
@@ -35,10 +35,10 @@ http_interactions:
       Keep-Alive:
       - timeout=15, max=100
       Via:
-      - 1.1 ID-5003323700470671 uproxy-4
+      - 1.1 ID-5003323700470671 uproxy-3
     body:
       encoding: US-ASCII
-      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213182817Z","event_type":"login.analyst_feedback","status":200,"client_id":"1253","hostname":"events1002.impermium.com","response_id":"DCF04530-4552-11E2-89EC-3CB61D137137"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213190339Z","event_type":"login.analyst_feedback","status":200,"client_id":"1253","hostname":"events1003.impermium.com","response_id":"CDF61212-4557-11E2-8F12-2CC381A98F61"}'
     http_version: 
-  recorded_at: Thu, 13 Dec 2012 18:41:44 GMT
+  recorded_at: Thu, 13 Dec 2012 19:03:43 GMT
 recorded_with: VCR 2.2.2
