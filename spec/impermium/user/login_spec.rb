@@ -14,6 +14,11 @@ describe Impermium::Login do
       res.timestamp.should be
       res.status.should_not be_nil
     end
+
+    it "returns an instance of Impermium::Response" do
+      Impermium.login(user_id, 1)
+        .should be_a_kind_of(Impermium::Response)
+    end
   end
 
   describe ".login_analyst_feedback" do
@@ -24,6 +29,11 @@ describe Impermium::Login do
       res.response_id.should be
       res.timestamp.should be
       res.status.should_not be_nil
+    end
+
+    it "returns an instance of Impermium::Response" do
+      Impermium.login_analyst_feedback(user_id, 1, desired_result)
+        .should be_a_kind_of(Impermium::Response)
     end
   end
 end

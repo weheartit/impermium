@@ -14,6 +14,11 @@ describe Impermium::Signup do
       res.timestamp.should be
       res.status.should_not be_nil
     end
+
+    it "returns an instance of Impermium::Response" do
+      Impermium.signup(user_id)
+        .should be_a_kind_of(Impermium::Response)
+    end
   end
 
   describe ".signup_analyst_feedback" do
@@ -24,6 +29,11 @@ describe Impermium::Signup do
       res.response_id.should be
       res.timestamp.should be
       res.status.should_not be_nil
+    end
+
+    it "returns an instance of Impermium::Response" do
+      Impermium.signup_analyst_feedback(user_id, desired_result)
+        .should be_a_kind_of(Impermium::Response)
     end
   end
 end
