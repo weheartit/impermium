@@ -5,6 +5,7 @@ Ruby wrapper for the [Impermium API](http://impermium.com).
 * gem version 1.0.0 supports the Impermium API version 3.1
 * gem version 1.1.0 supports the Impermium API version 3.1 (upgraded hashie and yajl-ruby gems)
 * gem version 1.2.0 supports the Impermium API version 3.1 (upgraded dependency on faraday_middleware gem)
+* gem version 4.0.0 supports the Impermium API version 4.0
 
 ## Usage ##
 
@@ -12,7 +13,8 @@ In order to use Impermium gem you must get an Impermium API key.
 
 ### Instantiate and configure a client ###
 
-The Impermium client can be instantiated and configured in several ways. A new client can be created with:
+The Impermium client can be instantiated and configured in several
+ways. A new client can be created with:
 
     client = Impermium.new(:api_key => <your_api_key>)
 
@@ -20,7 +22,8 @@ which is actually short for
 
     client = Impermium::Client.new(:api_key => <your_api_key>)
 
-Constructor accepts a hash of options that can be used to configure the Impermium client. Valid hash keys are:
+Constructor accepts a hash of options that can be used to configure
+the Impermium client. Valid hash keys are:
 
 * `:adapter` (sets Faraday adapter)
 * `:api_version` (sets Impermium API version - default 3.1)
@@ -44,49 +47,45 @@ Finally, the Impermium client can be configured through a block with:
 
     client = Impermium.new
 
+If method missing on Impermium module, it will be proxied to new client
+
+    Impermium.profile(...) will be sent to Impermium::Client.new(defaults)
+
+
 ### Calling API methods  ###
 
-Each method accepts the mandatory arguments of the corresponding API call, and takes an options hash and a block as optional arguments. Here is the list of all supported methods and their mandatory arguments:
+Each method accepts the mandatory arguments of the corresponding API
+call, and takes an options hash and a block as optional
+arguments. Here is the list of all supported methods and their
+mandatory arguments:
  
-* __USER__
-    + __Account:__
-      - `client.account(user_id, enduser_ip)`
-      - `client.account_attempt(enduser_ip)`
-      - `client.account_login(user_id, enduser_ip)`
-      - `client.account_analyst_feedback(analyst_id, user_id, desired_result)`
-      - `client.account_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, user_id, desired_result)`
-      
+* __Account__
+    + __Signup:__
+      - `client.signup(user_id)`
+      - `client.signup_analyst_feedback(user_id, desired_result)`
+    + __Login:__
+      - `client.login(user_id, attempt_id)`
+      - `client.login_analyst_feedback(user_id, attempt_id, desired_result)`
     + __Profile:__
-      - `client.profile(user_id, profile_id, enduser_ip)`
-      - `client.profile_analyst_feedback(profile_id, analyst_id, desired_result)`
-      - `client.profile_user_feedback(profile_id, rep_usr_id, rep_usr_type, reporter_ip, desired_result)`
+      - `client.profile(user_id, profile_id)`
+      - `client.profile_analyst_feedback(user_id, profile_id, desired_result)`
 
-* __CONTENT__
-    + __Blog post:__
-      - `client.blog_post(user_id, blog_post_id, content, blog_post_permalink, blog_url, enduser_ip)`
-      - `client.blog_post_analyst_feedback(analyst_id, blog_post_id, desired_result)`
-      - `client.blog_post_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, blog_post_id, desired_result)`
+* __Content__
+    + __Post:__
+      - `client.post(post_id, user_id, content, options={}, &block)`
+      - `client.post_analyst_feedback(user_id, post_id, desired_result, options={}, &block)`
+      - `client.post_user_feedback(user_id, post_id, rep_usr_type, desired_result, options={}, &block)`
   
-    + __Bookmark:__
-      - `client.bookmark(user_id, bookmark_id, bookmark_url, enduser_ip)`
-      - `client.bookmark_like(user_id, bookmark_id, bookmark_url, like_value, enduser_ip)`
-      - `client.bookmark_analyst_feedback(analyst_id, bookmark_id, desired_result)`
-      - `client.bookmark_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, bookmark_id, desired_result)`
-      
-    + __Comment:__
-      - `client.comment(user_id, comment_id, content, comment_permalink, article_permalink, enduser_ip)`
-      - `client.comment_analyst_feedback(analyst_id, comment_id, desired_result)`
-      - `client.comment_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, comment_id, desired_result)`
-      
-    + __Connection:__
-      - `client.connection(operation, connection_type, connection_id, requester_user_id, responder_user_id, enduser_ip)`
-      - `client.connection_analyst_feedback(analyst_id, connection_type, connection_id, desired_result)`
-      - `client.connection_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, connection_type, connection_id, desired_result)`
-      
-    + __Listing:__
-      - `client.listing(user_id, listing_id, content, listing_permalink, enduser_ip)`
-      - `client.listing_analyst_feedback(analyst_id, listing_id, desired_result)`
-      - `client.listing_user_feedback(rep_usr_id, rep_usr_type, reporter_ip, listing_id, desired_result)`
+    + __URL:__
+      - `client.url(user_id, url, options={}, &block)`
+      - `client.url_analyst_feedback(user_id, url, desired_result, options={}, &block)`
+      - `client.url_user_feedback(user_id, url, reporter_user_type, desired_result, options={}, &block)`
+
+* __Messaging__
+    + __Message:__
+      - `client.message(user_id, message_id, content, options = {}, &block)`
+      - `client.message_analyst_feedback(user_id, message_id, desired_result, options = {}, &block)`
+      - `client.message_user_feedback(user_id, message_id, desired_result, options = {}, &block)`
 
 Additional arguments can be passed through the hash which is the last argument for every method
 
@@ -102,9 +101,13 @@ You can find the complete arguments lists and types in the official Impermium AP
 
 ### Responses ###
 
-Any method call receiving a successful response from impermium API will return a Hash-like structure containing the body of the response, typically including `response_id`, `timestamp` and possibly `spam_classifier` and any other additional classifiers.
+Any method call receiving a successful response from impermium API
+will return a Hash-like structure containing the body of the response,
+typically including `response_id`, `timestamp` and possibly
+`spam_classifier` and any other additional classifiers.
 
-Any 4XX response will raise an Impermium Exception with the body of the response in the error message.
+Any 4XX response will raise an Impermium Exception with the body of
+the response in the error message.
 
 * A 400 status response from the impermium API will raise an `Impermium::BadRequest`
 * A 401 status response from the impermium API will raise an `Impermium::UnauthorizedRequest`
