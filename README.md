@@ -7,6 +7,9 @@ Ruby wrapper for the [Impermium API](http://impermium.com).
 * gem version 1.2.0 supports the Impermium API version 3.1 (upgraded dependency on faraday_middleware gem)
 * gem version 4.0.0 supports the Impermium API version 4.0
 
+Since version 4.0.0 first two digits will indicate API version and
+last one - library build version.
+
 ## Usage ##
 
 In order to use Impermium gem you must get an Impermium API key.
