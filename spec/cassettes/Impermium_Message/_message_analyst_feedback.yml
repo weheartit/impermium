@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/url/user_feedback/
+    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/message/analyst_feedback/
     body:
       encoding: UTF-8
-      string: ! '{"user_id":"whi777","url":"http://example.com/category/book/marks/33?query=whi","reporter_user_type":"ENDUSER","desired_result":{"4.0":{"tags":["spam"]}}}'
+      string: ! '{"user_id":null,"message_id":null,"desired_result":{"4.0":null}}'
     headers:
       Http-User-Agent:
       - Impermium Ruby Gem
@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 12 Dec 2012 21:59:01 GMT
+      - Thu, 13 Dec 2012 17:31:46 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
@@ -38,7 +38,7 @@ http_interactions:
       - 1.1 ID-5003323700470671 uproxy-5
     body:
       encoding: US-ASCII
-      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121212215902Z","event_type":"url.user_feedback","status":200,"client_id":"1253","hostname":"events1002.impermium.com","response_id":"2376CA30-44A7-11E2-AF6E-3CB61D137137"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213173146Z","event_type":"generic_message.analyst_feedback","status":200,"client_id":"1253","hostname":"events1001.impermium.com","response_id":"F7F4C20A-454A-11E2-AB2C-9F75CCDB01D8"}'
     http_version: 
-  recorded_at: Wed, 12 Dec 2012 22:12:24 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Thu, 13 Dec 2012 17:31:51 GMT
+recorded_with: VCR 2.2.2

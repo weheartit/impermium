@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Impermium do
+describe Impermium::Message do
 
   let(:user_id)          { "whi345" }
   let(:message_id)       { "123456" }

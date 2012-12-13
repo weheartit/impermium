@@ -2,6 +2,7 @@ require 'rspec'
 require 'impermium'
 require "vcr"
 require "psych"
+require "json"
 require 'pry'
 
 conf_file = File.join(File.dirname(__FILE__), "configuration.yml")

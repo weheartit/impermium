@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/message/user_feedback/
+    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/url/
     body:
       encoding: UTF-8
-      string: ! '{"user_id":null,"message_id":null,"desired_result":{"4.0":null}}'
+      string: ! '{"user_id":"whi777","url":null}'
     headers:
       Http-User-Agent:
       - Impermium Ruby Gem
@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 13 Dec 2012 16:18:11 GMT
+      - Thu, 13 Dec 2012 17:20:20 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
@@ -35,10 +35,10 @@ http_interactions:
       Keep-Alive:
       - timeout=15, max=100
       Via:
-      - 1.1 ID-5003323700470671 uproxy-5
+      - 1.1 ID-5003323700470671 uproxy-3
     body:
       encoding: US-ASCII
-      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213161811Z","event_type":"generic_message.user_feedback","status":200,"client_id":"1253","hostname":"events1003.impermium.com","response_id":"B0819EAC-4540-11E2-82FD-2CC381A98F61"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213172020Z","event_type":"url.create","status":200,"client_id":"1253","hostname":"events1002.impermium.com","response_id":"5ED38FC6-4549-11E2-80E6-3CB61D137137"}'
     http_version: 
-  recorded_at: Thu, 13 Dec 2012 16:18:15 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Thu, 13 Dec 2012 17:33:47 GMT
+recorded_with: VCR 2.2.2

@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/message/analyst_feedback/
+    uri: http://api-test.impermium.com/4.0/REMOVED-API-KEY-VALUE/post/user_feedback/
     body:
       encoding: UTF-8
-      string: ! '{"user_id":null,"message_id":null,"desired_result":{"4.0":null}}'
+      string: ! '{"reporter_user_id":"r3p0rt3r","reporter_user_type":"ENDUSER","reporter_ip":"1.1.1.1","blog_post_id":"just-a-post#984721","desired_result":{"spam_classifier":{"label":"notspam"}}}'
     headers:
       Http-User-Agent:
       - Impermium Ruby Gem
@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 13 Dec 2012 16:18:10 GMT
+      - Thu, 13 Dec 2012 17:31:19 GMT
       Server:
       - Apache/2.2.14 (Ubuntu)
       Transfer-Encoding:
@@ -38,7 +38,7 @@ http_interactions:
       - 1.1 ID-5003323700470671 uproxy-4
     body:
       encoding: US-ASCII
-      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213161811Z","event_type":"generic_message.analyst_feedback","status":200,"client_id":"1253","hostname":"events1003.impermium.com","response_id":"B01B528C-4540-11E2-8CEB-2CC381A98F61"}'
+      string: ! '{"4.0":{"action":"allow","tags":[]},"timestamp":"20121213173119Z","event_type":"generic_post.user_feedback","status":200,"client_id":"1253","hostname":"events1001.impermium.com","response_id":"E7C3F040-454A-11E2-8C0D-9F75CCDB01D8"}'
     http_version: 
-  recorded_at: Thu, 13 Dec 2012 16:18:14 GMT
-recorded_with: VCR 2.0.1
+  recorded_at: Thu, 13 Dec 2012 17:31:24 GMT
+recorded_with: VCR 2.2.2
