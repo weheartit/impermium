@@ -2,10 +2,10 @@ require "uri"
 require "faraday"
 require "faraday_middleware"
 require "impermium/configuration"
-require "impermium/content"
 require "impermium/response"
 require "impermium/errors"
-require "impermium/user"
+require "impermium/content"
+require "impermium/account"
 require "impermium/messaging"
 require "faraday/raise_4xx"
 
@@ -14,7 +14,7 @@ module Impermium
     include Configuration
     include Content
     include Messaging
-    include User
+    include Account
     
     def initialize(options = {})
       options = Impermium.options.merge(options)
