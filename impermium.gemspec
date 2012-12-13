@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.date = Time.now.strftime('%Y-%m-%d')
 
-  s.authors     = ["Juanjo Bazán", "Bosko Ivanisevic", "Neil Berkman"]
+  s.authors     = ["Juanjo Bazán", "Bosko Ivanisevic", "Neil Berkman", 'Antono Vasiljev']
   s.email       = ["jjbazan@gmail.com"]
   s.homepage    = "https://github.com/weheartit/impermium"
   s.summary     = "Impermium API wrapper"

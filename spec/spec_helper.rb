@@ -2,6 +2,8 @@ require 'rspec'
 require 'impermium'
 require "vcr"
 require "psych"
+require "json"
+require 'pry'
 
 conf_file = File.join(File.dirname(__FILE__), "configuration.yml")
 conf = {}
@@ -11,6 +13,7 @@ if File.exist?(conf_file)
   Impermium.endpoint = conf[:endpoint]
 else
   raise "WARNING: No configuration file found. API key must be set before tests are started"
+  exit 1
 end
 
 VCR.configure do |vcr|

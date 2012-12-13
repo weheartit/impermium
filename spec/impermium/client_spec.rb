@@ -3,33 +3,28 @@ require "spec_helper"
 describe "client configuration" do
 
   describe "default configuration" do
-    before(:each) do
-      @keys = Impermium::Configuration::VALID_CONFIG_KEYS
-    end
+    let(:keys)   { Impermium::Configuration::VALID_CONFIG_KEYS }
+    let(:client) { Impermium.new }
 
-    it "should support current API version: 3.1" do
-      client = Impermium.new
-      client.api_version.should == '3.1'
+    it "should support current API version: 4.0" do
+      client.api_version.should == '4.0'
     end
 
     describe "configuration attributes" do
       it "should have configuration read attributes" do
-        client = Impermium.new
-        @keys.each { |key| client.respond_to?(key).should be_true }
+        keys.each { |key| client.respond_to?(key).should be_true }
       end
 
       it "should have configuration write attributes" do
-        client = Impermium.new
-        @keys.each { |key| client.respond_to?("#{key}=").should be_true }
+        keys.each { |key| client.respond_to?("#{key}=").should be_true }
       end
       
       it "should correctly set values through attributes" do
-        client = Impermium.new
-        @keys.each do |key|
+        keys.each do |key|
           client.send("#{key}=", key)
         end
         
-        @keys.each do |key|
+        keys.each do |key|
           client.send(key).should == key
         end
       end

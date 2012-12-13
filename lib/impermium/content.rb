@@ -1,15 +1,9 @@
-require "impermium/content/blog_post"
-require "impermium/content/bookmark"
-require "impermium/content/comment"
-require "impermium/content/connection"
-require "impermium/content/listing"
+require "impermium/content/post"
+require "impermium/content/url"
 
 module Impermium
   module Content
-    include BlogPost
-    include Bookmark
-    include Comment
-    include Connection
-    include Listing
+    include Post
+    include URL
   end
 end
