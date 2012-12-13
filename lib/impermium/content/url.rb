@@ -23,6 +23,5 @@ module Impermium
         :desired_result => { Configuration::DEFAULT_API_VERSION => desired_result })
       api_post("url/user_feedback", options, &block)
     end
-    
   end
 end
