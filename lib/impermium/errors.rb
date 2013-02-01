@@ -2,7 +2,7 @@ module Impermium
   class BaseError < StandardError
     attr_reader :request_type
     attr_reader :request_url
-    
+
     def initialize(request_type, request_url, message)
       @request_type = request_type
       @request_url = request_url
@@ -13,7 +13,7 @@ module Impermium
   class BadRequest < BaseError
   end
 
-  class UnauthorizedReqeust < BaseError
+  class UnauthorizedRequest < BaseError
   end
 
   class ForbiddenRequest < BaseError
